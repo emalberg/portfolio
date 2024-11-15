@@ -3,6 +3,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import theme from '../themes/theme';
 import { Roboto } from 'next/font/google';
 import './globals.css';
+import Navigation from '@/components/navigation/Navigation';
 
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
@@ -21,7 +22,10 @@ export default function RootLayout({ children }) {
     <html lang='en'>
       <body className={roboto.variable}>
         <AppRouterCacheProvider>
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          <ThemeProvider theme={theme}>
+            <Navigation />
+            {children}
+          </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
     </html>

@@ -21,6 +21,13 @@ const theme = createTheme({
     success: {
       main: '#43a047',
     },
+    navigation: {
+      main: '#FAF9F6',
+    },
+    text: {
+      primary: '#FFFFFF',
+      secondary: '#000000',
+    },
   },
 });
 export default theme;
