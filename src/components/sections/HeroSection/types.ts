@@ -1,0 +1,44 @@
+// Strapi data types for the Hero Section
+export interface StrapiHeroSection {
+  Name: string
+  Phrase: string
+  Keyword: {
+    technologies?: string[]
+    creative?: string[]
+  }
+  Personal_Bio: any[] // Rich text content from Strapi
+  Professional_Bio: any[] // Rich text content from Strapi
+  Personal_Bio_Title: string
+  Professional_Bio_Title: string
+  Background?: {
+    url: string
+    alternativeText?: string
+  }
+}
+
+export interface StrapiResponse {
+  data: {
+    id: number
+    Hero_Section: StrapiHeroSection
+    // ... other sections
+  }
+  meta: any
+}
+
+// Component prop types
+export interface KeywordData {
+  technologies?: string[]
+  creative?: string[]
+}
+
+export interface HeroSectionProps {
+  name?: string
+  phrase?: string
+  keywords?: KeywordData
+  bio1Title?: string
+  bio1Content?: string
+  bio2Title?: string
+  bio2Content?: string
+  backgroundImage?: string
+  className?: string
+}
