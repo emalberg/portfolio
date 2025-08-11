@@ -6,8 +6,8 @@ export interface StrapiHeroSection {
     technologies?: string[]
     creative?: string[]
   }
-  Personal_Bio: any[] // Rich text content from Strapi
-  Professional_Bio: any[] // Rich text content from Strapi
+  Personal_Bio: unknown[] // Rich text content from Strapi
+  Professional_Bio: unknown[] // Rich text content from Strapi
   Personal_Bio_Title: string
   Professional_Bio_Title: string
   Background?: {
@@ -22,7 +22,7 @@ export interface StrapiResponse {
     Hero_Section: StrapiHeroSection
     // ... other sections
   }
-  meta: any
+  meta: unknown
 }
 
 // Component prop types

@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils'
 import Bio from '@/components/Bio/Bio'
 import AnimatedKeyword from '@/components/AnimatedKeywords/AnimatedKeyword'
 import type { HeroSectionProps } from './types'
-import { combineKeywords } from './utils'
+import { combineKeywords } from '@/utils'
 import { 
   DEFAULT_CONTENT, 
   ACCESSIBILITY_CONSTANTS,

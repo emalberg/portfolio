@@ -1,4 +1,4 @@
-import type { StrapiResponse, StrapiHeroSection, KeywordData } from './types'
+import type { StrapiResponse, StrapiHeroSection, KeywordData } from '@/components/sections/HeroSection/types'
 
 /**
  * Parses Strapi response data and extracts hero section information
@@ -25,15 +25,21 @@ export function parseStrapiHeroData(strapiData: StrapiResponse) {
 /**
  * Parses Strapi rich text content into plain text
  */
-function parseRichText(richTextContent: any[]): string {
+interface RichTextBlock {
+  type: string;
+  children?: Array<{ text?: string }>;
+}
+
+function parseRichText(richTextContent: unknown[]): string {
   if (!Array.isArray(richTextContent)) {
     return ''
   }
 
   return richTextContent
     .map(block => {
-      if (block.type === 'paragraph' && Array.isArray(block.children)) {
-        return block.children
+      const typedBlock = block as RichTextBlock;
+      if (typedBlock.type === 'paragraph' && Array.isArray(typedBlock.children)) {
+        return typedBlock.children
           .map((child: { text?: string }) => child.text || '')
           .join('')
       }
