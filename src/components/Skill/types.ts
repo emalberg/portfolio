@@ -4,7 +4,7 @@ export interface SkillProps {
   iconAlt: string;
 }
 
-import type { MotionValue } from 'framer-motion';
+import type { MotionValue } from 'motion/react';
 
 export interface SkillIconProps {
   iconUrl: string;

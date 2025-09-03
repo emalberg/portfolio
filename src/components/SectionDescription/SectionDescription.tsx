@@ -1,6 +1,6 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import type { SectionDescriptionProps } from '../types';
+import { motion } from 'motion/react';
+import type { SectionDescriptionProps } from '../SectionHeader/types';
 
 export function SectionDescription({ description, animations }: SectionDescriptionProps) {
   return (

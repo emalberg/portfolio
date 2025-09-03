@@ -12,3 +12,9 @@ export * from './project-section-utils';
 
 // Certificate Section utilities
 export * from './certificate-section-utils';
+
+// Social Link utilities
+export * from './social-link-utils';
+
+// Strapi data transformation utilities
+export * from './strapi-transformers';

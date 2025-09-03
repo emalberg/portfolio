@@ -1,0 +1,78 @@
+'use client'
+import React from 'react'
+import Image from 'next/image'
+import { motion } from 'motion/react'
+import type { SocialLinkProps } from './types'
+
+export default function SocialLink({
+  social,
+  variant = 'mobile',
+  index = 0
+}: SocialLinkProps & { index?: number }) {
+  const isMobile = variant === 'mobile'
+  
+  const baseClasses = "inline-flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+
+  const mobileClasses = `${baseClasses} text-foreground hover:text-primary px-3 py-2 rounded-lg hover:bg-accent/10 transition-colors`
+
+  if (isMobile) {
+    return (
+      <a
+        href={social.Link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={mobileClasses}
+        aria-label={`Visit ${social.Name} profile`}
+        title={social.Name}
+      >
+        <Image
+          src={social.Icon.SVG.url}
+          alt={social.Icon.SVG.alternativeText}
+          className="w-6 h-6"
+          width={social.Icon.SVG.width}
+          height={social.Icon.SVG.height}
+        />
+        <span className="font-medium text-sm text-foreground">
+          {social.Name}
+        </span>
+      </a>
+    )
+  }
+
+  // Calculate position for multiple social links
+  const topPosition = `calc(50vh - ${index * 4}rem)`
+
+  return (
+    <motion.a
+      href={social.Link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="fixed left-0 z-50 bg-accent/90 backdrop-blur-sm border-r border-t border-b border-border rounded-r-full shadow-lg overflow-hidden"
+      style={{ 
+        top: topPosition
+      }}
+      aria-label={`Visit ${social.Name} profile`}
+      title={social.Name}
+      initial={{ x: "-70%" }}
+      animate={{ x: "-70%" }}
+      whileHover={{ x: 0 }}
+      transition={{ 
+        duration: 0.3,
+        ease: "easeOut"
+      }}
+    >
+      <div className="flex items-end justify-end gap-10 px-3 py-2">
+        <span className="font-medium text-sm text-foreground whitespace-nowrap">
+          {social.Name}
+        </span>
+        <Image
+          src={social.Icon.SVG.url}
+          alt={social.Icon.SVG.alternativeText}
+          className="w-5 h-5 flex-shrink-0"
+          width={social.Icon.SVG.width}
+          height={social.Icon.SVG.height}
+        />
+      </div>
+    </motion.a>
+  )
+}

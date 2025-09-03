@@ -11,10 +11,46 @@ import SkillCarousel from '../../SkillCarousel/SkillCarousel';
 import DecorativeElements from '../../DecorativeElements/DecorativeElements';
 import type { SkillsSectionProps } from './types';
 
-export default function SkillsSection({ data }: SkillsSectionProps) {
+export default function SkillsSection({ 
+  title, 
+  subtitle, 
+  skills 
+}: { 
+  title: string; 
+  subtitle: string; 
+  skills: Array<{
+    id: number;
+    name: string;
+    icon: {
+      name: string;
+      url: string;
+      alt: string;
+    };
+  }>;
+}) {
   const isSmallScreen = useSmallScreenDetection();
   const animations = createSkillsSectionAnimation();
   const carouselConfig = createCarouselConfig(isSmallScreen);
+
+  // Transform the new data format to the expected format
+  const transformedSkills = skills.map(skill => ({
+    id: skill.id,
+    Name: skill.name,
+    Icon: {
+      Name: skill.icon.name,
+      SVG: {
+        url: skill.icon.url,
+        alternativeText: skill.icon.alt
+      }
+    }
+  }));
+
+  // Create the data object expected by the existing components
+  const sectionData = {
+    Title: title,
+    Sub: [{ type: 'paragraph', children: [{ type: 'text', text: subtitle }] }],
+    Skills: transformedSkills
+  };
 
   return (
     <section 
@@ -23,12 +59,12 @@ export default function SkillsSection({ data }: SkillsSectionProps) {
     >
       <div className="container mx-auto px-4">
         <SectionHeader 
-          title={data.Title} 
+          title={sectionData.Title} 
           animations={animations} 
         />
 
         <SkillCarousel
-          skills={data.Skills}
+          skills={sectionData.Skills}
           isSmallScreen={isSmallScreen}
           animations={animations}
           carouselConfig={carouselConfig}

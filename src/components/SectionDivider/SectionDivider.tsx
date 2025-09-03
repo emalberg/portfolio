@@ -1,6 +1,6 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import type { SectionElementProps } from '../types';
+import { motion } from 'motion/react';
+import type { SectionElementProps } from '../SectionHeader/types';
 
 export function SectionDivider({ animations }: SectionElementProps) {
   return (

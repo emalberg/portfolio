@@ -1,6 +1,6 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import type { SectionTitleProps } from '../types';
+import { motion } from 'motion/react';
+import type { SectionTitleProps } from '../SectionHeader/types';
 
 export function SectionTitle({ title, animations }: SectionTitleProps) {
   return (

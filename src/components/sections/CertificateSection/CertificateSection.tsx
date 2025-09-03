@@ -13,12 +13,37 @@ import {
 } from '@/utils';
 import type { CertificateSectionProps } from './types';
 
-export default function CertificateSection({ data }: CertificateSectionProps) {
+export default function CertificateSection({ 
+  title, 
+  description, 
+  certificates 
+}: { 
+  title: string; 
+  description: string; 
+  certificates: Array<{
+    id: number;
+    name: string;
+    issuer: string;
+    dateReceived: string;
+    expirationDate?: string;
+    image: {
+      url: string;
+      alt: string;
+    };
+  }>;
+}) {
   const animations = createCertificateSectionAnimation();
 
+  // Create the data object expected by the existing components
+  const sectionData = {
+    Title: title,
+    Description: description,
+    Certificates: certificates
+  };
+
   // Validate certificate section data
-  if (!validateCertificateSectionData(data)) {
-    console.warn('CertificateSection: Invalid certificate section data provided', data);
+  if (!validateCertificateSectionData(sectionData)) {
+    console.warn('CertificateSection: Invalid certificate section data provided', sectionData);
     return null;
   }
 
@@ -27,11 +52,11 @@ export default function CertificateSection({ data }: CertificateSectionProps) {
       id={COMPONENT_IDS.CERTIFICATES_SECTION}
       className={getCertificateContainerClasses()}
     >
-              <div className={getCertificateInnerContainerClasses()}>
+      <div className={getCertificateInnerContainerClasses()}>
         <SectionHeader 
-          title={data.Title} 
+          title={sectionData.Title} 
           animations={animations}
-          description={data.Description}
+          description={sectionData.Description}
         />
 
         <motion.div
@@ -45,7 +70,7 @@ export default function CertificateSection({ data }: CertificateSectionProps) {
         >
           {/* Grid layout for certificates */}
           <div className={getCertificateGridContainerClasses()}>
-            {data.Certificates.map((certificate, index) => (
+            {sectionData.Certificates.map((certificate, index) => (
               <motion.div
                 key={`${certificate.id}-${index}`}
                 variants={animations.item}

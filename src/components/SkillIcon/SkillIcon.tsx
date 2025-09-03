@@ -1,8 +1,8 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue } from 'motion/react';
 import Image from 'next/image';
 import { SKILL_CONSTANTS } from '@/constants/constants';
-import type { SkillIconProps } from '../types';
+import type { SkillIconProps } from '../Skill/types';
 
 export function SkillIcon({ iconUrl, iconAlt, rotateX, rotateY }: SkillIconProps) {
   return (

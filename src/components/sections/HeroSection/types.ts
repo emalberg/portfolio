@@ -31,14 +31,20 @@ export interface KeywordData {
   creative?: string[]
 }
 
+import type { Social } from '@/components/SocialLink/types'
+
 export interface HeroSectionProps {
   name?: string
   phrase?: string
-  keywords?: KeywordData
+  keywords?: {
+    technologies: string[]
+    creative: string[]
+  }
   bio1Title?: string
   bio1Content?: string
   bio2Title?: string
   bio2Content?: string
   backgroundImage?: string
   className?: string
+  socials?: Social[]
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import { motion } from 'motion/react'
 import { cn } from '@/lib/utils'
 import { ANIMATION_CONSTANTS } from '@/constants/constants'
-import type { KeywordDisplayProps } from '../types'
+import type { KeywordDisplayProps } from '../AnimatedKeywords/types'
 
 export function KeywordDisplay({
   keyword,

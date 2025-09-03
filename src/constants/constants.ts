@@ -534,6 +534,25 @@ export const CERTIFICATE_SECTION_CONSTANTS = {
   },
 } as const
 
+// Social Link constants
+export const SOCIAL_LINK_CONSTANTS = {
+  ANIMATION: {
+    HOVER_SCALE: 1.05,
+    ACTIVE_SCALE: 0.95,
+    TRANSITION_DURATION: 300,
+    TRANSITION_EASE: "easeOut" as const,
+  },
+  POSITIONING: {
+    DESKTOP_LEFT: "1rem",
+    DESKTOP_Z_INDEX: 50,
+  },
+  SIZES: {
+    MOBILE_ICON: 24,
+    DESKTOP_ICON: 20,
+    DESKTOP_ICON_HOVER: 24,
+  },
+} as const
+
 // Sample skills data for demo pages
 export const SAMPLE_SKILLS_DATA: {
   SKILLS_SECTION: {
@@ -643,6 +662,143 @@ export const SAMPLE_SKILLS_DATA: {
           SVG: {
             url: "/docker-logo.svg",
             alternativeText: "Docker Icon"
+          }
+        }
+      }
+    ]
+  }
+}
+
+// Sample social data for demo pages
+export const SAMPLE_SOCIAL_DATA: {
+  SOCIAL_SECTION: {
+    id: number;
+    Socials: Array<{
+      Order: number;
+      id: number;
+      Name: string;
+      Link: string;
+      Icon: {
+        id: number;
+        Name: string;
+        SVG: {
+          id: number;
+          documentId: string;
+          name: string;
+          alternativeText: string;
+          caption: string | null;
+          width: number;
+          height: number;
+          formats: Record<string, unknown> | null;
+          hash: string;
+          ext: string;
+          mime: string;
+          size: number;
+          url: string;
+          previewUrl: string | null;
+          provider: string;
+          provider_metadata: Record<string, unknown> | null;
+          createdAt: string;
+          updatedAt: string;
+          publishedAt: string;
+        };
+      };
+    }>;
+  };
+} = {
+  SOCIAL_SECTION: {
+    id: 5,
+    Socials: [
+      {
+        Order: 0,
+        id: 5,
+        Name: "GitHub",
+        Link: "https://github.com/emalberg",
+        Icon: {
+          id: 10,
+          Name: "GitHub",
+          SVG: {
+            id: 1,
+            documentId: "m48cl1rits5hydkt83qomgvf",
+            name: "github-logo_svgstack_com_50361754492116.svg",
+            alternativeText: "GitHub Icon",
+            caption: null,
+            width: 201,
+            height: 201,
+            formats: null,
+            hash: "github_logo_svgstack_com_50361754492116_cc2710fdd9",
+            ext: ".svg",
+            mime: "image/svg+xml",
+            size: 1.57,
+            url: "/uploads/github_logo_svgstack_com_50361754492116_cc2710fdd9.svg",
+            previewUrl: null,
+            provider: "local",
+            provider_metadata: null,
+            createdAt: "2025-08-07T02:46:43.579Z",
+            updatedAt: "2025-08-07T16:01:34.082Z",
+            publishedAt: "2025-08-07T02:46:43.580Z"
+          }
+        }
+      },
+      {
+        Order: 1,
+        id: 6,
+        Name: "LinkedIn",
+        Link: "https://linkedin.com/in/emalberg",
+        Icon: {
+          id: 11,
+          Name: "LinkedIn",
+          SVG: {
+            id: 2,
+            documentId: "linkedin-demo",
+            name: "linkedin.svg",
+            alternativeText: "LinkedIn Icon",
+            caption: null,
+            width: 201,
+            height: 201,
+            formats: null,
+            hash: "linkedin_demo",
+            ext: ".svg",
+            mime: "image/svg+xml",
+            size: 1.57,
+            url: "/react-logo.svg",
+            previewUrl: null,
+            provider: "local",
+            provider_metadata: null,
+            createdAt: "2025-08-07T02:46:43.579Z",
+            updatedAt: "2025-08-07T16:01:34.082Z",
+            publishedAt: "2025-08-07T02:46:43.580Z"
+          }
+        }
+      },
+      {
+        Order: 2,
+        id: 7,
+        Name: "Twitter",
+        Link: "https://twitter.com/emalberg",
+        Icon: {
+          id: 12,
+          Name: "Twitter",
+          SVG: {
+            id: 3,
+            documentId: "twitter-demo",
+            name: "twitter.svg",
+            alternativeText: "Twitter Icon",
+            caption: null,
+            width: 201,
+            height: 201,
+            formats: null,
+            hash: "twitter_demo",
+            ext: ".svg",
+            mime: "image/svg+xml",
+            size: 1.57,
+            url: "/typescript-logo.svg",
+            previewUrl: null,
+            provider: "local",
+            provider_metadata: null,
+            createdAt: "2025-08-07T02:46:43.579Z",
+            updatedAt: "2025-08-07T16:01:34.082Z",
+            publishedAt: "2025-08-07T02:46:43.580Z"
           }
         }
       }

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react'
 import { 
   ANIMATION_CONSTANTS
 } from '@/constants/constants'
-import type { BioTabContentProps } from '../types'
+import type { BioTabContentProps } from '../Bio/types'
 
 export function BioTabContent({ activeTab, activeTabData }: BioTabContentProps) {
   return (
