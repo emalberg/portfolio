@@ -7,7 +7,7 @@ import type { BioTabContentProps } from '../Bio/types'
 
 export function BioTabContent({ activeTab, activeTabData }: BioTabContentProps) {
   return (
-    <div className="relative min-h-[120px]">
+    <div className="relative h-72">
       <AnimatePresence mode="wait">
         <motion.div
           key={activeTab}
@@ -18,16 +18,16 @@ export function BioTabContent({ activeTab, activeTabData }: BioTabContentProps) 
             duration: ANIMATION_CONSTANTS.TAB_ANIMATION_DURATION, 
             ease: ANIMATION_CONSTANTS.TAB_ANIMATION_EASE 
           }}
-          className="w-full"
+          className="w-full h-full"
           role="tabpanel"
           id={`tabpanel-${activeTab}`}
           aria-labelledby={`tab-${activeTab}`}
         >
-          <div className="bg-card/10 backdrop-blur-sm rounded-lg p-6 py-8 border border-border h-auto">
+          <div className="bg-card/10 backdrop-blur-sm rounded-lg p-6 py-8 border border-border h-full flex flex-col">
             <h2 className="text-lg font-semibold text-primary-foreground mb-3">
               {activeTabData.title}
             </h2>
-            <p className="text-base text-primary-foreground/90 leading-relaxed">
+            <p className="text-base text-primary-foreground/90 leading-relaxed flex-1 overflow-y-auto">
               {activeTabData.content}
             </p>
           </div>

@@ -45,6 +45,7 @@ function HeroSectionWithFallback({ data }: { data: TransformedPageData['hero'] }
         bio1Content={data.bio.about.content}
         bio2Title={data.bio.work.title}
         bio2Content={data.bio.work.content}
+        backgroundImage={process.env.NEXT_PUBLIC_STRAPI_URL + data.background.url}
         socials={[]} // We'll handle socials separately
       />
     </Suspense>

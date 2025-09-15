@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { DECORATIVE_CONSTANTS } from '@/constants/constants';
 import { DecorativeCircle } from '@/components/DecorativeCircle/DecorativeCircle';
 

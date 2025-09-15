@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion } from "motion/react";
 import { PROJECT_SECTION_CONSTANTS } from '@/constants/constants';
 import ProjectCard from '@/components/ProjectCard';
 import type { ProjectGridProps } from './types';

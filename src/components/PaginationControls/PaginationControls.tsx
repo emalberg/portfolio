@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion } from "motion/react";
 import { PaginationButton } from '@/components/PaginationButton/PaginationButton'
 import { PageNumbers } from '@/components/PageNumbers/PageNumbers'
 import type { PaginationControlsProps } from './types';

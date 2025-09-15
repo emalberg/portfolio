@@ -15,6 +15,8 @@ export default function SocialLink({
 
   const mobileClasses = `${baseClasses} text-foreground hover:text-primary px-3 py-2 rounded-lg hover:bg-accent/10 transition-colors`
 
+  const iconUrl = process.env.NEXT_PUBLIC_STRAPI_URL + social.Icon.SVG.url
+
   if (isMobile) {
     return (
       <a
@@ -26,7 +28,7 @@ export default function SocialLink({
         title={social.Name}
       >
         <Image
-          src={social.Icon.SVG.url}
+          src={iconUrl}
           alt={social.Icon.SVG.alternativeText}
           className="w-6 h-6"
           width={social.Icon.SVG.width}
@@ -66,7 +68,7 @@ export default function SocialLink({
           {social.Name}
         </span>
         <Image
-          src={social.Icon.SVG.url}
+          src={iconUrl}
           alt={social.Icon.SVG.alternativeText}
           className="w-5 h-5 flex-shrink-0"
           width={social.Icon.SVG.width}

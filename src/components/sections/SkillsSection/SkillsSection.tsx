@@ -39,7 +39,7 @@ export default function SkillsSection({
     Icon: {
       Name: skill.icon.name,
       SVG: {
-        url: skill.icon.url,
+        url: process.env.NEXT_PUBLIC_STRAPI_URL + skill.icon.url,
         alternativeText: skill.icon.alt
       }
     }
@@ -60,6 +60,7 @@ export default function SkillsSection({
       <div className="container mx-auto px-4">
         <SectionHeader 
           title={sectionData.Title} 
+          description={subtitle}
           animations={animations} 
         />
 

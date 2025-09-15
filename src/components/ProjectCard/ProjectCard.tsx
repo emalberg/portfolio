@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion } from "motion/react";
 import { COMPONENT_IDS } from '@/constants/constants';
 import { CardFront, CardBack } from '../CardFace/CardFace';
 import { createHoverVariants, validateProjectData } from '@/utils';

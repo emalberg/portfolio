@@ -1,4 +1,4 @@
-import { useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { useMotionValue, useSpring, useTransform } from 'motion/react';
 import { SKILL_CONSTANTS } from '@/constants/constants';
 
 export function useSkillMouseTracking() {

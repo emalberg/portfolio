@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion } from "motion/react";
 import { PROJECT_CARD_CONSTANTS } from '@/constants/constants';
 import { Button } from '@/components/ui/button';
 import { getLinkIcon, getLinkButtonVariant, createButtonStaggerVariants } from '@/utils';
