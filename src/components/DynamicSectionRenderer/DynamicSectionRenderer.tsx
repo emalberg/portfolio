@@ -34,7 +34,40 @@ function SectionWrapper({ children, delay = 0 }: { children: React.ReactNode; de
 }
 
 // Hero section with loading fallback
-function HeroSectionWithFallback({ data }: { data: TransformedPageData['hero'] }) {
+function HeroSectionWithFallback({ data, socials }: { data: TransformedPageData['hero']; socials: TransformedPageData['socials'] }) {
+  // Transform socials data to match the expected format
+  const transformedSocials = socials.socials.map((social) => ({
+    id: social.id,
+    Name: social.name,
+    Link: social.link,
+    Icon: {
+      id: social.id,
+      Name: social.icon.name,
+      SVG: {
+        id: social.id,
+        documentId: '',
+        name: social.icon.name,
+        alternativeText: social.icon.alt,
+        caption: null,
+        width: 24,
+        height: 24,
+        formats: null,
+        hash: '',
+        ext: '.svg',
+        mime: 'image/svg+xml',
+        size: 0,
+        url: social.icon.url,
+        previewUrl: null,
+        provider: 'local',
+        provider_metadata: null,
+        createdAt: '',
+        updatedAt: '',
+        publishedAt: ''
+      }
+    },
+    Order: social.order
+  }));
+
   return (
     <Suspense fallback={<HeroSkeleton />}>
       <HeroSection
@@ -46,14 +79,14 @@ function HeroSectionWithFallback({ data }: { data: TransformedPageData['hero'] }
         bio2Title={data.bio.work.title}
         bio2Content={data.bio.work.content}
         backgroundImage={process.env.NEXT_PUBLIC_STRAPI_URL + data.background.url}
-        socials={[]} // We'll handle socials separately
+        socials={transformedSocials}
       />
     </Suspense>
   );
 }
 
 // Skills section with loading fallback
-function SkillsSectionWithFallback({ data }: { data: TransformedPageData['skills'] }) {
+function SkillsSectionWithFallback({ data, floatingStyles }: { data: TransformedPageData['skills']; floatingStyles?: string }) {
   if (!data) return null;
   
   return (
@@ -63,6 +96,7 @@ function SkillsSectionWithFallback({ data }: { data: TransformedPageData['skills
           title={data.title}
           subtitle={data.subtitle}
           skills={data.skills}
+          floatingStyles={floatingStyles}
         />
       </SectionWrapper>
     </Suspense>
@@ -70,7 +104,7 @@ function SkillsSectionWithFallback({ data }: { data: TransformedPageData['skills
 }
 
 // Projects section with loading fallback
-function ProjectsSectionWithFallback({ data }: { data: TransformedPageData['projects'] }) {
+function ProjectsSectionWithFallback({ data, floatingStyles }: { data: TransformedPageData['projects']; floatingStyles?: string }) {
   if (!data) return null;
   
   return (
@@ -80,6 +114,7 @@ function ProjectsSectionWithFallback({ data }: { data: TransformedPageData['proj
           title={data.title}
           description={data.description}
           projects={data.projects}
+          floatingStyles={floatingStyles}
         />
       </SectionWrapper>
     </Suspense>
@@ -87,7 +122,7 @@ function ProjectsSectionWithFallback({ data }: { data: TransformedPageData['proj
 }
 
 // Certificates section with loading fallback
-function CertificatesSectionWithFallback({ data }: { data: TransformedPageData['certificates'] }) {
+function CertificatesSectionWithFallback({ data, floatingStyles }: { data: TransformedPageData['certificates']; floatingStyles?: string }) {
   if (!data) return null;
   
   return (
@@ -97,6 +132,7 @@ function CertificatesSectionWithFallback({ data }: { data: TransformedPageData['
           title={data.title}
           description={data.description}
           certificates={data.certificates}
+          floatingStyles={floatingStyles}
         />
       </SectionWrapper>
     </Suspense>
@@ -109,10 +145,10 @@ export function DynamicSectionRenderer({ data }: DynamicSectionRendererProps) {
 
   // Create a map of section types to their render functions
   const sectionRenderers = {
-    hero: () => <HeroSectionWithFallback data={hero} />,
-    skills: () => <SkillsSectionWithFallback data={skills} />,
-    projects: () => <ProjectsSectionWithFallback data={projects} />,
-    certificates: () => <CertificatesSectionWithFallback data={certificates} />,
+    hero: () => <HeroSectionWithFallback data={hero} socials={socials} />,
+    skills: (floatingStyles?: string) => <SkillsSectionWithFallback data={skills} floatingStyles={floatingStyles} />,
+    projects: (floatingStyles?: string) => <ProjectsSectionWithFallback data={projects} floatingStyles={floatingStyles} />,
+    certificates: (floatingStyles?: string) => <CertificatesSectionWithFallback data={certificates} floatingStyles={floatingStyles} />,
   };
 
   return (
@@ -120,9 +156,10 @@ export function DynamicSectionRenderer({ data }: DynamicSectionRendererProps) {
       {/* Render sections in order */}
       {sectionOrder.map((section) => {
         const renderer = sectionRenderers[section.type];
+        const floatingStyles = section.order === 2 ? 'border border-gray-400 rounded-xl shadow-lg shadow-gray-200 m-3' : undefined;
         return renderer ? (
           <div key={`${section.type}-${section.order}`}>
-            {renderer()}
+            {renderer(floatingStyles)}
           </div>
         ) : null;
       })}

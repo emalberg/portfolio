@@ -3,7 +3,8 @@
 import { SKILLS_SECTION_CONSTANTS, COMPONENT_IDS } from '@/constants/constants';
 import { 
   createSkillsSectionAnimation, 
-  createCarouselConfig 
+  createCarouselConfig,
+  getSkillsContainerClasses
 } from '@/utils';
 import { useSmallScreenDetection } from '@/hooks';
 import SectionHeader from '../../SectionHeader/SectionHeader';
@@ -14,7 +15,8 @@ import type { SkillsSectionProps } from './types';
 export default function SkillsSection({ 
   title, 
   subtitle, 
-  skills 
+  skills,
+  floatingStyles
 }: { 
   title: string; 
   subtitle: string; 
@@ -27,6 +29,7 @@ export default function SkillsSection({
       alt: string;
     };
   }>;
+  floatingStyles?: string;
 }) {
   const isSmallScreen = useSmallScreenDetection();
   const animations = createSkillsSectionAnimation();
@@ -55,7 +58,7 @@ export default function SkillsSection({
   return (
     <section 
       id={COMPONENT_IDS.SKILLS_SECTION}
-      className="py-16 md:py-24 bg-background relative"
+      className={getSkillsContainerClasses(floatingStyles)}
     >
       <div className="container mx-auto px-4">
         <SectionHeader 

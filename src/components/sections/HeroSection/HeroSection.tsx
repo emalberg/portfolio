@@ -41,6 +41,7 @@ export default function HeroSection({
 
   return (
     <section
+      id={COMPONENT_IDS.HERO_SECTION}
       className={cn(
         "relative min-h-auto flex items-center justify-center overflow-hidden py-8 pb-16 sm:pb-12 lg:py-15",
         className

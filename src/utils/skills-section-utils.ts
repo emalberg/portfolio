@@ -48,6 +48,14 @@ export const getSkillsContainerClassName = (isSmallScreen: boolean): string =>
   }`;
 
 /**
+ * Gets container classes with responsive padding for skills
+ */
+export const getSkillsContainerClasses = (floatingStyles?: string): string => {
+  const baseClasses = 'py-16 md:py-24 bg-background relative';
+  return floatingStyles ? `${baseClasses} ${floatingStyles}` : baseClasses;
+};
+
+/**
  * Gets carousel content height class
  */
 export const getCarouselContentHeight = (isSmallScreen: boolean): string =>

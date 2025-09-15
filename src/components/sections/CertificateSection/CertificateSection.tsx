@@ -16,7 +16,8 @@ import type { CertificateSectionProps } from './types';
 export default function CertificateSection({ 
   title, 
   description, 
-  certificates 
+  certificates,
+  floatingStyles
 }: { 
   title: string; 
   description: string; 
@@ -31,6 +32,7 @@ export default function CertificateSection({
       alt: string;
     };
   }>;
+  floatingStyles?: string;
 }) {
   const animations = createCertificateSectionAnimation();
 
@@ -50,7 +52,7 @@ export default function CertificateSection({
   return (
     <section 
       id={COMPONENT_IDS.CERTIFICATES_SECTION}
-      className={getCertificateContainerClasses()}
+      className={getCertificateContainerClasses(floatingStyles)}
     >
       <div className={getCertificateInnerContainerClasses()}>
         <SectionHeader 

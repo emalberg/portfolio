@@ -36,8 +36,9 @@ export const getProjectGridClasses = (): string => {
 /**
  * Gets container classes with responsive padding for projects
  */
-export const getProjectContainerClasses = (): string => {
-  return 'py-16 md:py-24 bg-background relative';
+export const getProjectContainerClasses = (floatingStyles?: string): string => {
+  const baseClasses = 'py-16 md:py-24 bg-background relative';
+  return floatingStyles ? `${baseClasses} ${floatingStyles}` : baseClasses;
 };
 
 /**

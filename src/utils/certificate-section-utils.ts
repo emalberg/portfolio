@@ -36,8 +36,9 @@ export const getCertificateGridClasses = (): string => {
 /**
  * Gets container classes with responsive padding for certificates
  */
-export const getCertificateContainerClasses = (): string => {
-  return 'py-16 md:py-24 bg-background relative';
+export const getCertificateContainerClasses = (floatingStyles?: string): string => {
+  const baseClasses = 'py-16 md:py-24 bg-background relative';
+  return floatingStyles ? `${baseClasses} ${floatingStyles}` : baseClasses;
 };
 
 /**

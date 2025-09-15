@@ -63,6 +63,7 @@ export const COMPONENT_IDS = {
   PROJECT_SECTION: 'project-section',
   PROJECT_CARD: 'project-card',
   CERTIFICATES_SECTION: 'certificates-section',
+  HERO_SECTION: 'hero-section',
 } as const
 
 // Skills Section constants

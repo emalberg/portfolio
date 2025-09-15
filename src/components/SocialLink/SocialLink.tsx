@@ -30,11 +30,11 @@ export default function SocialLink({
         <Image
           src={iconUrl}
           alt={social.Icon.SVG.alternativeText}
-          className="w-6 h-6"
+          className="w-6 h-6 filter invert"
           width={social.Icon.SVG.width}
           height={social.Icon.SVG.height}
         />
-        <span className="font-medium text-sm text-foreground">
+        <span className="font-medium text-sm text-primary-foreground">
           {social.Name}
         </span>
       </a>

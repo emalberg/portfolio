@@ -18,7 +18,8 @@ import type { ProjectSectionProps } from './types';
 export default function ProjectSection({ 
   title, 
   description, 
-  projects 
+  projects,
+  floatingStyles
 }: { 
   title: string; 
   description: string; 
@@ -36,6 +37,7 @@ export default function ProjectSection({
       label: string;
     }>;
   }>;
+  floatingStyles?: string;
 }) {
   const [currentPage, setCurrentPage] = useState(1);
   const animations = createProjectSectionAnimation();
@@ -93,7 +95,7 @@ export default function ProjectSection({
   return (
     <section 
       id={COMPONENT_IDS.PROJECT_SECTION}
-      className={getProjectContainerClasses()}
+      className={getProjectContainerClasses(floatingStyles)}
     >
       <div className={getProjectInnerContainerClasses()}>
         <SectionHeader 
