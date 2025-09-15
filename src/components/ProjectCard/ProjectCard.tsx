@@ -21,6 +21,13 @@ export default function ProjectCard({ project, className = '' }: ProjectCardProp
     setIsFlipped(!isFlipped);
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleFlip();
+    }
+  };
+
   return (
     <motion.div
       id={`${COMPONENT_IDS.PROJECT_CARD}-${project.id}`}
@@ -30,6 +37,9 @@ export default function ProjectCard({ project, className = '' }: ProjectCardProp
       whileHover="hover"
       role="article"
       aria-label={`Project card for ${project.name}`}
+      tabIndex={0}
+      onKeyDown={handleKeyDown}
+      aria-describedby={`project-${project.id}-description`}
     >
       {/* Simple flip with CSS transition */}
       <div

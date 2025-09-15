@@ -30,7 +30,7 @@ export default function CertificateSection({
     image: {
       url: string;
       alt: string;
-    };
+    } | null;
   }>;
   floatingStyles?: string;
 }) {

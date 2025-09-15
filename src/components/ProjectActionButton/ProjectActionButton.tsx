@@ -37,9 +37,15 @@ export default function ProjectActionButton({ link, index }: ProjectActionButton
           href={link.url}
           target="_blank"
           rel="noopener noreferrer"
-          title={link.url}
+          title={`Open ${link.label} in a new tab`}
+          aria-describedby={`${link.type}-description`}
         >
-          <Icon className="w-4 h-4" />
+          <Icon className="w-4 h-4" aria-hidden="true" />
+          <span id={`${link.type}-description`} className="sr-only">
+            {link.type === 'demo' ? 'Live demonstration' : 
+             link.type === 'repo' ? 'Source code repository' : 
+             'Project documentation'}
+          </span>
           {link.label}
         </a>
       </Button>

@@ -32,7 +32,10 @@ export function CardFront({ project, isFlipped, onFlip }: CardFaceProps) {
               <CardTitle className="text-xl font-bold text-foreground">
                 {project.name}
               </CardTitle>
-              <CardDescription className="text-muted-foreground leading-relaxed">
+              <CardDescription 
+                id={`project-${project.id}-description`}
+                className="text-muted-foreground leading-relaxed"
+              >
                 {project.description}
               </CardDescription>
             </CardHeader>
@@ -46,8 +49,9 @@ export function CardFront({ project, isFlipped, onFlip }: CardFaceProps) {
                   onFlip();
                 }}
                 className="text-muted-foreground hover:text-foreground"
+                aria-label="View project actions and links"
               >
-                <RotateCcw className="w-4 h-4 mr-2" />
+                <RotateCcw className="w-4 h-4 mr-2" aria-hidden="true" />
                 View Actions
               </Button>
             </div>
@@ -87,9 +91,9 @@ export function CardBack({ project, isFlipped, onFlip }: CardFaceProps) {
             size="sm"
             onClick={onFlip}
             className="text-muted-foreground hover:text-foreground"
-            aria-label="Flip back to project details"
+            aria-label="Return to project details view"
           >
-            <ArrowLeft className="w-4 h-4 mr-2" />
+            <ArrowLeft className="w-4 h-4 mr-2" aria-hidden="true" />
             Back to details
           </Button>
         </CardContent>

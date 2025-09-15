@@ -25,7 +25,7 @@ export default function SocialLink({
         rel="noopener noreferrer"
         className={mobileClasses}
         aria-label={`Visit ${social.Name} profile`}
-        title={social.Name}
+        title={`Open ${social.Name} in a new tab`}
       >
         <Image
           src={iconUrl}
@@ -54,7 +54,7 @@ export default function SocialLink({
         top: topPosition
       }}
       aria-label={`Visit ${social.Name} profile`}
-      title={social.Name}
+      title={`Open ${social.Name} in a new tab`}
       initial={{ x: "-70%" }}
       animate={{ x: "-70%" }}
       whileHover={{ x: 0 }}

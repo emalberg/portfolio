@@ -149,17 +149,35 @@ export interface StrapiCertificateSection {
   Description: StrapiRichText[];
   Certificates: Array<{
     id: number;
-    name: string;
-    issuer: string;
+    Name: string;
+    Issuer: string;
     dateReceived: string;
     expirationDate?: string;
-    image: StrapiImage;
+    image: StrapiImage | null;
   }>;
 }
 
 export interface StrapiSocialSection {
   id: number;
   Socials: StrapiSocial[];
+}
+
+export interface StrapiNavBarSection {
+  Order: number;
+  id: number;
+  Logo: StrapiImage | null;
+  Links: Array<{
+    id: number;
+    Name: string;
+    Target: string | null; // section ID to scroll to
+    Order: number;
+  }>;
+  CTAButton: {
+    id: number;
+    text: string;
+    url: string;
+    order: number;
+  } | null;
 }
 
 export interface StrapiHomePageData {
@@ -173,6 +191,7 @@ export interface StrapiHomePageData {
   Project_Section: StrapiProjectSection | null;
   Certificate_Section: StrapiCertificateSection | null;
   Social_Section: StrapiSocialSection;
+  NavBar_Section: StrapiNavBarSection | null;
 }
 
 export interface StrapiHomePageResponse {
@@ -246,7 +265,7 @@ export interface TransformedCertificateData {
     image: {
       url: string;
       alt: string;
-    };
+    } | null;
   }>;
 }
 
@@ -262,6 +281,27 @@ export interface TransformedSocialData {
     };
     order: number;
   }>;
+}
+
+export interface TransformedNavBarData {
+  logo: {
+    url: string;
+    alt: string;
+    width?: number;
+    height?: number;
+  } | null;
+  links: Array<{
+    id: number;
+    name: string;
+    target: string;
+    order: number;
+  }>;
+  ctaButton: {
+    id: number;
+    text: string;
+    url: string;
+    order: number;
+  } | null;
 }
 
 export interface TransformedPageData {

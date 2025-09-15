@@ -27,9 +27,27 @@ export const ACCESSIBILITY_CONSTANTS = {
   ARIA_LABELS: {
     heroSection: 'hero-heading',
     backgroundImage: 'true',
+    mainNavigation: 'Main navigation',
+    mobileNavigation: 'Mobile navigation',
+    projectCard: 'Project card',
+    bioTabs: 'Bio information tabs',
+    socialLinks: 'Social media links',
+    skipToContent: 'Skip to main content',
+    footer: 'Site footer',
   },
   ROLES: {
     section: 'region',
+    navigation: 'navigation',
+    main: 'main',
+    article: 'article',
+    tablist: 'tablist',
+    tab: 'tab',
+    tabpanel: 'tabpanel',
+  },
+  LIVE_REGIONS: {
+    polite: 'polite',
+    assertive: 'assertive',
+    off: 'off',
   },
 } as const
 
@@ -64,6 +82,7 @@ export const COMPONENT_IDS = {
   PROJECT_CARD: 'project-card',
   CERTIFICATES_SECTION: 'certificates-section',
   HERO_SECTION: 'hero-section',
+  NAVBAR: 'navbar',
 } as const
 
 // Skills Section constants
@@ -878,3 +897,20 @@ export const SAMPLE_CERTIFICATE_DATA: {
     ]
   }
 }
+
+// NavBar constants
+export const NAVBAR_CONSTANTS = {
+  SCROLL_THRESHOLD: 50,
+  SCROLL_OFFSET: 40,
+  ANIMATION: {
+    TRANSITION_DURATION: 300,
+    BACKDROP_BLUR: 'md',
+  },
+  SIZES: {
+    HEIGHT: 56, // h-14
+    MOBILE_HEIGHT: 48, // h-12
+  },
+  BREAKPOINTS: {
+    MOBILE: 768,
+  },
+} as const

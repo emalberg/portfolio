@@ -72,11 +72,32 @@ Your Strapi content type should have the following structure:
       - Name (Text)
       - SVG (Media - Image)
 
-## 3. API Endpoint
+- **NavBar_Section** (Component)
+  - Order (Number)
+  - Logo (Media - Image)
+  - Links (Component - repeatable)
+    - id (Number)
+    - name (Text)
+    - target (Text) - section ID to scroll to
+    - order (Number)
+  - CTAButton (Component)
+    - id (Number)
+    - text (Text)
+    - url (Text)
+    - order (Number)
+
+## 3. API Endpoints
 
 The portfolio will fetch data from:
+
+**Home Page Data:**
 ```
 GET http://localhost:1337/api/home-page?populate=all
+```
+
+**NavBar Data:**
+```
+GET http://localhost:1337/api/navbar
 ```
 
 ## 4. Features
@@ -90,6 +111,13 @@ GET http://localhost:1337/api/home-page?populate=all
 - Sections are rendered based on the `Order` field from Strapi
 - Missing sections are gracefully handled
 - Responsive loading states with animated skeletons
+
+### Sticky Navigation Bar
+- Fixed position navigation with smooth scroll to sections
+- Dynamic text color based on current section (light/dark)
+- Translucent background with backdrop blur
+- Responsive design with mobile menu support
+- CTA button for external links (blog, contact, etc.)
 
 ### Performance Optimizations
 - Data is cached and revalidated

@@ -6,14 +6,14 @@ export interface CertificateProps {
   image: {
     url: string;
     alt: string;
-  };
+  } | null;
 }
 
 export interface CertificateImageProps {
   image: {
     url: string;
     alt: string;
-  };
+  } | null;
 }
 
 export interface CertificateInfoProps {

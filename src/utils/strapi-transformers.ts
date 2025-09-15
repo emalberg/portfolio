@@ -6,12 +6,14 @@ import {
   TransformedProjectData, 
   TransformedCertificateData, 
   TransformedSocialData,
+  TransformedNavBarData,
   StrapiRichText,
   StrapiHeroSection,
   StrapiSkillSection,
   StrapiProjectSection,
   StrapiCertificateSection,
-  StrapiSocialSection
+  StrapiSocialSection,
+  StrapiNavBarSection
 } from '@/types/strapi';
 
 // Helper function to extract text from rich text content
@@ -101,14 +103,14 @@ function transformCertificateSection(certificateSection: StrapiCertificateSectio
     description: extractTextFromRichText(certificateSection.Description),
     certificates: certificateSection.Certificates?.map((cert) => ({
       id: cert.id,
-      name: cert.name,
-      issuer: cert.issuer,
+      name: cert.Name,
+      issuer: cert.Issuer,
       dateReceived: cert.dateReceived,
       expirationDate: cert.expirationDate,
-      image: {
-        url: cert.image?.url || '',
-        alt: cert.image?.alternativeText || ''
-      }
+      image: cert.image ? {
+        url: cert.image.url,
+        alt: cert.image.alternativeText || ''
+      } : null
     })) || []
   };
 }
@@ -129,6 +131,27 @@ function transformSocialSection(socialSection: StrapiSocialSection): Transformed
       },
       order: social.Order || 0
     })).sort((a, b) => a.order - b.order) || []
+  };
+}
+
+// Transform navbar section data
+function transformNavBarSection(navBarSection: StrapiNavBarSection | null): TransformedNavBarData | null {
+  if (!navBarSection) return null;
+  
+  return {
+    title: navBarSection.Title || 'Portfolio',
+    links: navBarSection.Links?.map((link) => ({
+      id: link.id,
+      name: link.name,
+      target: link.target,
+      order: link.order
+    })).sort((a, b) => a.order - b.order) || [],
+    ctaButton: {
+      id: navBarSection.CTAButton?.id || 0,
+      text: navBarSection.CTAButton?.text || 'Contact',
+      url: navBarSection.CTAButton?.url || '#contact',
+      order: navBarSection.CTAButton?.order || 0
+    }
   };
 }
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
+import { ACCESSIBILITY_CONSTANTS } from '@/constants/constants'
 import type { BioTabNavigationProps } from '@/components/Bio/types'
 
 export function BioTabNavigation({ tabs, activeTab, onTabChange }: BioTabNavigationProps) {
@@ -8,6 +9,7 @@ export function BioTabNavigation({ tabs, activeTab, onTabChange }: BioTabNavigat
     <div 
       className="flex space-x-1 bg-card/10 backdrop-blur-sm rounded-lg p-1 border border-border"
       role="tablist"
+      aria-label={ACCESSIBILITY_CONSTANTS.ARIA_LABELS.bioTabs}
     >
       {tabs.map((tab) => (
         <Button
