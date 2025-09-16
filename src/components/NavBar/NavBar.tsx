@@ -9,11 +9,13 @@ import { TransformedNavBarData } from '@/types/strapi';
 import { NavBarLink } from '@/components/NavBarLink';
 import { NavBarCTAButton } from '@/components/NavBarCTAButton';
 import { MobileMenu } from '@/components/MobileMenu';
+import { getOptimizedImageProps } from '@/lib/image-utils';
+import { NavBarSkeleton } from '@/components/ui/loading-skeleton';
 
 // Main NavBar Component
 export default function NavBar({ data, className }: { data: TransformedNavBarData | null; className?: string }) {
   if (!data) {
-    return null;
+    return <NavBarSkeleton />;
   }
   const [state, setState] = useState<NavBarState>({
     isScrolled: false,
@@ -115,20 +117,26 @@ export default function NavBar({ data, className }: { data: TransformedNavBarDat
       )}
       role="navigation"
       aria-label={ACCESSIBILITY_CONSTANTS.ARIA_LABELS.mainNavigation}
-      style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50 }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14">
           {/* Logo/Brand - only render if logo data exists */}
           {data.logo?.url && (
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 relative">
               <Image
-                src={data.logo.url}
+                onClick={() => scrollToSection('hero-section')}
+                src={process.env.NEXT_PUBLIC_STRAPI_URL + data.logo.url}
                 alt={data.logo.alt || 'Logo'}
-                width={data.logo.width || 120}
-                height={data.logo.height || 40}
-                className="h-8 w-auto transition-all duration-200 hover:opacity-80"
-                priority
+                width={data.logo.width || 240}
+                height={data.logo.height || 100}
+                className={cn(
+                  "h-16 w-auto transition-all duration-200 hover:opacity-80 transform translate-y-4 relative z-10",
+                  state.textColor === 'light' 
+                    ? 'brightness-100' 
+                    : 'invert'
+                )}
+                tabIndex={0}
+                {...getOptimizedImageProps('logo')}
               />
             </div>
           )}

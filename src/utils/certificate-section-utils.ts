@@ -56,7 +56,7 @@ export const getCertificateGridContainerClasses = (): string => {
 };
 
 /**
- * Validates certificate section data
+ * Validates certificate section data with improved handling of empty/invalid data
  */
 interface CertificateSectionDataCheck {
   Title: unknown;
@@ -73,7 +73,71 @@ export const validateCertificateSectionData = (data: unknown): data is Certifica
   return !!(
     'Title' in obj &&
     'Certificates' in obj &&
-    Array.isArray(obj.Certificates) &&
-    obj.Certificates.length > 0
+    Array.isArray(obj.Certificates)
   );
+};
+
+/**
+ * Validates individual certificate data
+ */
+interface CertificateDataCheck {
+  id: unknown;
+  name: unknown;
+  issuer: unknown;
+  dateReceived: unknown;
+  expirationDate?: unknown;
+  image: unknown;
+}
+
+export const validateCertificateData = (certificate: unknown): certificate is CertificateDataCheck => {
+  if (!certificate || typeof certificate !== 'object' || certificate === null) {
+    return false;
+  }
+  
+  const obj = certificate as Record<string, unknown>;
+  
+  // Check if required fields exist
+  if (!('id' in obj) || !('name' in obj) || !('issuer' in obj) || !('dateReceived' in obj) || !('image' in obj)) {
+    return false;
+  }
+  
+  // Check if id is a valid number
+  if (typeof obj.id !== 'number' || obj.id <= 0) {
+    return false;
+  }
+  
+  // Check if name and issuer are valid strings (not undefined, null, or empty)
+  if (typeof obj.name !== 'string' || !obj.name.trim() || 
+      typeof obj.issuer !== 'string' || !obj.issuer.trim()) {
+    return false;
+  }
+  
+  // Check if dateReceived is a valid string
+  if (typeof obj.dateReceived !== 'string' || !obj.dateReceived.trim()) {
+    return false;
+  }
+  
+  // Check if image is valid (can be null or object with url)
+  if (obj.image !== null && (typeof obj.image !== 'object' || obj.image === null)) {
+    return false;
+  }
+  
+  // If image is an object, check if it has valid url
+  if (obj.image && typeof obj.image === 'object') {
+    const imageObj = obj.image as Record<string, unknown>;
+    if (!('url' in imageObj) || typeof imageObj.url !== 'string' || !imageObj.url.trim()) {
+      return false;
+    }
+  }
+  
+  return true;
+};
+
+/**
+ * Filters out invalid certificates from an array
+ */
+export const filterValidCertificates = (certificates: unknown[]): CertificateDataCheck[] => {
+  return certificates.filter((certificate): certificate is CertificateDataCheck => {
+    return validateCertificateData(certificate);
+  });
 };

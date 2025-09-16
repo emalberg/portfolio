@@ -3,6 +3,7 @@ import { motion, useMotionValue } from 'motion/react';
 import Image from 'next/image';
 import { SKILL_CONSTANTS } from '@/constants/constants';
 import type { SkillIconProps } from '../Skill/types';
+import { getOptimizedImageProps } from '@/lib/image-utils';
 
 export function SkillIcon({ iconUrl, iconAlt, rotateX, rotateY }: SkillIconProps) {
   return (
@@ -21,6 +22,7 @@ export function SkillIcon({ iconUrl, iconAlt, rotateX, rotateY }: SkillIconProps
           width={48}
           height={48}
           className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 object-contain"
+          {...getOptimizedImageProps('skill-icon')}
         />
       </motion.div>
     </div>

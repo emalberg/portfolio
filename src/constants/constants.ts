@@ -78,7 +78,7 @@ export const COMPONENT_IDS = {
     work: 'work',
   },
   SKILLS_SECTION: 'skills-section',
-  PROJECT_SECTION: 'project-section',
+  PROJECT_SECTION: 'projects-section',
   PROJECT_CARD: 'project-card',
   CERTIFICATES_SECTION: 'certificates-section',
   HERO_SECTION: 'hero-section',

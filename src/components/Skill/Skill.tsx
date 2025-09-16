@@ -5,8 +5,9 @@ import { useSkillMouseTracking } from '@/hooks';
 import { SkillIcon } from '@/components/SkillIcon/SkillIcon';
 import { SkillName } from '@/components/SkillName/SkillName';
 import type { SkillProps } from './types';
+import { SkillCardSkeleton } from '@/components/ui/loading-skeleton';
 
-export default function Skill({ name, iconUrl, iconAlt }: SkillProps) {
+export default function Skill({ name, iconUrl, iconAlt, isLoading = false }: SkillProps & { isLoading?: boolean }) {
   const { 
     mouseX, 
     mouseY, 
@@ -15,6 +16,11 @@ export default function Skill({ name, iconUrl, iconAlt }: SkillProps) {
     handleMouseMove, 
     handleMouseLeave 
   } = useSkillMouseTracking();
+
+  // Show skeleton if loading
+  if (isLoading) {
+    return <SkillCardSkeleton delay={0} />;
+  }
 
   return (
     <motion.div

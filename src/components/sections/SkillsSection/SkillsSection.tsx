@@ -11,12 +11,14 @@ import SectionHeader from '../../SectionHeader/SectionHeader';
 import SkillCarousel from '../../SkillCarousel/SkillCarousel';
 import DecorativeElements from '../../DecorativeElements/DecorativeElements';
 import type { SkillsSectionProps } from './types';
+import { SkillCardSkeleton } from '@/components/ui/loading-skeleton';
 
 export default function SkillsSection({ 
   title, 
   subtitle, 
   skills,
-  floatingStyles
+  floatingStyles,
+  isLoading = false
 }: { 
   title: string; 
   subtitle: string; 
@@ -30,6 +32,7 @@ export default function SkillsSection({
     };
   }>;
   floatingStyles?: string;
+  isLoading?: boolean;
 }) {
   const isSmallScreen = useSmallScreenDetection();
   const animations = createSkillsSectionAnimation();
@@ -67,12 +70,21 @@ export default function SkillsSection({
           animations={animations} 
         />
 
-        <SkillCarousel
-          skills={sectionData.Skills}
-          isSmallScreen={isSmallScreen}
-          animations={animations}
-          carouselConfig={carouselConfig}
-        />
+        {isLoading ? (
+          // Show skeleton skills while loading
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-8 mt-8">
+            {Array.from({ length: 8 }).map((_, index) => (
+              <SkillCardSkeleton key={`skeleton-${index}`} delay={index * 100} />
+            ))}
+          </div>
+        ) : (
+          <SkillCarousel
+            skills={sectionData.Skills}
+            isSmallScreen={isSmallScreen}
+            animations={animations}
+            carouselConfig={carouselConfig}
+          />
+        )}
 
         <DecorativeElements />
       </div>

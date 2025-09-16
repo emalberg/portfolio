@@ -3,6 +3,7 @@ import React from 'react'
 import Image from 'next/image'
 import { motion } from 'motion/react'
 import type { SocialLinkProps } from './types'
+import { getOptimizedImagePropsWithSize } from '@/lib/image-utils'
 
 export default function SocialLink({
   social,
@@ -33,6 +34,7 @@ export default function SocialLink({
           className="w-6 h-6 filter invert"
           width={social.Icon.SVG.width}
           height={social.Icon.SVG.height}
+          {...getOptimizedImagePropsWithSize('social-icon', social.Icon.SVG.width, social.Icon.SVG.height)}
         />
         <span className="font-medium text-sm text-primary-foreground">
           {social.Name}
@@ -63,7 +65,7 @@ export default function SocialLink({
         ease: "easeOut"
       }}
     >
-      <div className="flex items-end justify-end gap-10 px-3 py-2">
+      <div className="flex items-end justify-end gap-10 px-3 py-2 min-w-32">
         <span className="font-medium text-sm text-foreground whitespace-nowrap">
           {social.Name}
         </span>
@@ -73,6 +75,7 @@ export default function SocialLink({
           className="w-5 h-5 flex-shrink-0"
           width={social.Icon.SVG.width}
           height={social.Icon.SVG.height}
+          {...getOptimizedImagePropsWithSize('social-icon-small', social.Icon.SVG.width, social.Icon.SVG.height)}
         />
       </div>
     </motion.a>

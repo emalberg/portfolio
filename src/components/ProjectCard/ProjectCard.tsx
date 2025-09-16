@@ -6,15 +6,21 @@ import { COMPONENT_IDS } from '@/constants/constants';
 import { CardFront, CardBack } from '../CardFace/CardFace';
 import { createHoverVariants, validateProjectData } from '@/utils';
 import type { ProjectCardProps } from './types';
+import { ProjectCardSkeleton } from '@/components/ui/loading-skeleton';
 
-export default function ProjectCard({ project, className = '' }: ProjectCardProps) {
+export default function ProjectCard({ project, className = '', isLoading = false }: ProjectCardProps & { isLoading?: boolean }) {
   const [isFlipped, setIsFlipped] = useState(false);
   const hoverVariants = createHoverVariants();
+
+  // Show skeleton if loading
+  if (isLoading) {
+    return <ProjectCardSkeleton delay={0} />;
+  }
 
   // Validate project data
   if (!validateProjectData(project)) {
     console.warn('ProjectCard: Invalid project data provided', project);
-    return null;
+    return <ProjectCardSkeleton delay={0} />;
   }
 
   const handleFlip = () => {

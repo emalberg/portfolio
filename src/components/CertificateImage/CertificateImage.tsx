@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import type { CertificateImageProps } from '../Certificate/types';
+import { getOptimizedImageProps } from '@/lib/image-utils';
 
 export function CertificateImage({ image }: CertificateImageProps) {
   // Don't render anything if no image is provided
@@ -23,7 +24,7 @@ export function CertificateImage({ image }: CertificateImageProps) {
         alt={image.alt}
         fill
         className="object-cover"
-        loading="lazy"
+        {...getOptimizedImageProps('certificate')}
       />
     </div>
   );

@@ -15,6 +15,8 @@ import {
   StrapiSocialSection,
   StrapiNavBarSection
 } from '@/types/strapi';
+import { filterValidProjects } from './project-card-utils';
+import { filterValidCertificates } from './certificate-section-utils';
 
 // Helper function to extract text from rich text content
 function extractTextFromRichText(richText: StrapiRichText[]): string {
@@ -78,19 +80,24 @@ function transformSkillSection(skillSection: StrapiSkillSection | null): Transfo
 function transformProjectSection(projectSection: StrapiProjectSection | null): TransformedProjectData | null {
   if (!projectSection) return null;
   
+  const rawProjects = projectSection.Projects?.map((project) => ({
+    id: project.id,
+    name: project.name,
+    description: project.description,
+    image: {
+      url: project.image?.url || '',
+      alt: project.image?.alternativeText || ''
+    },
+    links: project.links || []
+  })) || [];
+
+  // Filter out invalid projects
+  const validProjects = filterValidProjects(rawProjects);
+  
   return {
     title: projectSection.Title || '',
     description: extractTextFromRichText(projectSection.Description),
-    projects: projectSection.Projects?.map((project) => ({
-      id: project.id,
-      name: project.name,
-      description: project.description,
-      image: {
-        url: project.image?.url || '',
-        alt: project.image?.alternativeText || ''
-      },
-      links: project.links || []
-    })) || []
+    projects: validProjects as any[]
   };
 }
 
@@ -98,20 +105,25 @@ function transformProjectSection(projectSection: StrapiProjectSection | null): T
 function transformCertificateSection(certificateSection: StrapiCertificateSection | null): TransformedCertificateData | null {
   if (!certificateSection) return null;
   
+  const rawCertificates = certificateSection.Certificates?.map((cert) => ({
+    id: cert.id,
+    name: cert.Name,
+    issuer: cert.Issuer,
+    dateReceived: cert.dateReceived,
+    expirationDate: cert.expirationDate,
+    image: cert.image ? {
+      url: cert.image.url,
+      alt: cert.image.alternativeText || ''
+    } : null
+  })) || [];
+
+  // Filter out invalid certificates
+  const validCertificates = filterValidCertificates(rawCertificates);
+  
   return {
     title: certificateSection.Title || '',
     description: extractTextFromRichText(certificateSection.Description),
-    certificates: certificateSection.Certificates?.map((cert) => ({
-      id: cert.id,
-      name: cert.Name,
-      issuer: cert.Issuer,
-      dateReceived: cert.dateReceived,
-      expirationDate: cert.expirationDate,
-      image: cert.image ? {
-        url: cert.image.url,
-        alt: cert.image.alternativeText || ''
-      } : null
-    })) || []
+    certificates: validCertificates as any[]
   };
 }
 
@@ -139,19 +151,24 @@ function transformNavBarSection(navBarSection: StrapiNavBarSection | null): Tran
   if (!navBarSection) return null;
   
   return {
-    title: navBarSection.Title || 'Portfolio',
+    logo: navBarSection.Logo ? {
+      url: navBarSection.Logo.url,
+      alt: navBarSection.Logo.alternativeText,
+      width: navBarSection.Logo.width,
+      height: navBarSection.Logo.height
+    } : null,
     links: navBarSection.Links?.map((link) => ({
       id: link.id,
-      name: link.name,
-      target: link.target,
-      order: link.order
+      name: link.Name,
+      target: link.Target || '',
+      order: link.Order
     })).sort((a, b) => a.order - b.order) || [],
-    ctaButton: {
-      id: navBarSection.CTAButton?.id || 0,
-      text: navBarSection.CTAButton?.text || 'Contact',
-      url: navBarSection.CTAButton?.url || '#contact',
-      order: navBarSection.CTAButton?.order || 0
-    }
+    ctaButton: navBarSection.CTAButton ? {
+      id: navBarSection.CTAButton.id,
+      text: navBarSection.CTAButton.text,
+      url: navBarSection.CTAButton.url,
+      order: navBarSection.CTAButton.order
+    } : null
   };
 }
 

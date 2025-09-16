@@ -14,6 +14,8 @@ import {
 
 interface DynamicSectionRendererProps {
   data: TransformedPageData;
+  isFallback?: boolean;
+  lastUpdated?: string;
 }
 
 // Section wrapper with CSS animations
@@ -140,7 +142,7 @@ function CertificatesSectionWithFallback({ data, floatingStyles }: { data: Trans
 }
 
 // Main dynamic section renderer
-export function DynamicSectionRenderer({ data }: DynamicSectionRendererProps) {
+export function DynamicSectionRenderer({ data, isFallback = false, lastUpdated }: DynamicSectionRendererProps) {
   const { hero, skills, projects, certificates, socials, sectionOrder } = data;
 
   // Create a map of section types to their render functions
@@ -153,6 +155,21 @@ export function DynamicSectionRenderer({ data }: DynamicSectionRendererProps) {
 
   return (
     <main>
+      {/* Fallback indicator */}
+      {isFallback && (
+        <div className="fixed top-20 right-4 z-50 bg-yellow-100 border border-yellow-400 text-yellow-800 px-3 py-2 rounded-md text-sm shadow-lg">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></span>
+            <span>Using cached data - Strapi unavailable</span>
+          </div>
+          {lastUpdated && (
+            <div className="text-xs mt-1 opacity-75">
+              Last updated: {new Date(lastUpdated).toLocaleString()}
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Render sections in order */}
       {sectionOrder.map((section) => {
         const renderer = sectionRenderers[section.type];

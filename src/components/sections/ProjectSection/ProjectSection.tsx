@@ -12,14 +12,18 @@ import {
   getProjectInnerContainerClasses,
   getProjectGridContainerClasses,
   validateProjectSectionData,
+  filterValidProjects,
 } from '@/utils';
 import type { ProjectSectionProps } from './types';
+import { ProjectCardSkeleton } from '@/components/ui/loading-skeleton';
+import { ProjectsEmptyState } from '@/components/ui/empty-state';
 
 export default function ProjectSection({ 
   title, 
   description, 
   projects,
-  floatingStyles
+  floatingStyles,
+  isLoading = false
 }: { 
   title: string; 
   description: string; 
@@ -38,11 +42,13 @@ export default function ProjectSection({
     }>;
   }>;
   floatingStyles?: string;
+  isLoading?: boolean;
 }) {
   const [currentPage, setCurrentPage] = useState(1);
+  const [showEmptyState, setShowEmptyState] = useState(false);
   const animations = createProjectSectionAnimation();
 
-  // Transform the new data format to the expected format
+  // Transform and filter the new data format to the expected format
   const transformedProjects = projects.map(project => ({
     id: project.id,
     name: project.name,
@@ -54,17 +60,78 @@ export default function ProjectSection({
     links: project.links
   }));
 
+  // Filter out invalid projects
+  const validProjects = filterValidProjects(transformedProjects);
+
   // Create the data object expected by the existing components
   const sectionData = {
     Title: title,
     Description: description,
-    Projects: transformedProjects
+    Projects: validProjects
   };
 
   // Reset to first page when data changes
   useEffect(() => {
     setCurrentPage(1);
   }, [projects]);
+
+  // Handle skeleton to empty state transition
+  useEffect(() => {
+    if (!isLoading && validProjects.length === 0) {
+      // Show skeleton for a brief moment, then show empty state
+      const timer = setTimeout(() => {
+        setShowEmptyState(true);
+      }, 2000); // 2 second delay to show skeleton first
+
+      return () => clearTimeout(timer);
+    } else {
+      setShowEmptyState(false);
+    }
+  }, [isLoading, validProjects.length]);
+
+  // If no valid projects and showEmptyState is true, show empty state message
+  if (!isLoading && validProjects.length === 0 && showEmptyState) {
+    return (
+      <section 
+        id={COMPONENT_IDS.PROJECT_SECTION}
+        className={getProjectContainerClasses(floatingStyles)}
+      >
+        <div className={getProjectInnerContainerClasses()}>
+          <SectionHeader 
+            title={sectionData.Title} 
+            animations={animations}
+            description={sectionData.Description}
+          />
+          <div className="max-w-2xl mx-auto mt-8 md:mt-12">
+            <ProjectsEmptyState />
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // If loading or no valid projects (but not showing empty state yet), show skeleton loading
+  if (isLoading || (validProjects.length === 0 && !showEmptyState)) {
+    return (
+      <section 
+        id={COMPONENT_IDS.PROJECT_SECTION}
+        className={getProjectContainerClasses(floatingStyles)}
+      >
+        <div className={getProjectInnerContainerClasses()}>
+          <SectionHeader 
+            title={sectionData.Title} 
+            animations={animations}
+            description={sectionData.Description}
+          />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mt-8 md:mt-12">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <ProjectCardSkeleton key={`skeleton-${index}`} delay={index * 150} />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   // Validate project section data
   if (!validateProjectSectionData(sectionData)) {
@@ -116,18 +183,31 @@ export default function ProjectSection({
         >
           {/* Grid layout with reduced spacing */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mt-8 md:mt-12">
-            {currentProjects.map((project, index) => (
-              <motion.div
-                key={`${project.id}-${currentPage}`}
-                variants={animations.item}
-                className="w-full h-full"
-              >
-                <ProjectCard
-                  project={project}
+            {isLoading ? (
+              // Show skeleton cards while loading
+              Array.from({ length: 6 }).map((_, index) => (
+                <motion.div
+                  key={`skeleton-${index}`}
+                  variants={animations.item}
                   className="w-full h-full"
-                />
-              </motion.div>
-            ))}
+                >
+                  <ProjectCardSkeleton delay={index * 150} />
+                </motion.div>
+              ))
+            ) : (
+              currentProjects.map((project, index) => (
+                <motion.div
+                  key={`${(project as any).id}-${currentPage}`}
+                  variants={animations.item}
+                  className="w-full h-full"
+                >
+                  <ProjectCard
+                    project={project as any}
+                    className="w-full h-full"
+                  />
+                </motion.div>
+              ))
+            )}
           </div>
         </motion.div>
 

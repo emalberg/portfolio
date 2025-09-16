@@ -96,9 +96,10 @@ export const createHoverVariants = () => ({
 });
 
 /**
- * Validates project data
+ * Validates project data with improved handling of empty/invalid data
  */
 interface ProjectDataCheck {
+  id: unknown;
   name: unknown;
   description: unknown;
   image: unknown;
@@ -117,14 +118,23 @@ export const validateProjectData = (project: unknown): project is ProjectDataChe
   
   const obj = project as Record<string, unknown>;
   
-  if (!('name' in obj) || !('description' in obj) || !('image' in obj) || !('links' in obj)) {
+  // Check if required fields exist
+  if (!('id' in obj) || !('name' in obj) || !('description' in obj) || !('image' in obj) || !('links' in obj)) {
     return false;
   }
   
-  if (typeof obj.name !== 'string' || typeof obj.description !== 'string') {
+  // Check if id is a valid number
+  if (typeof obj.id !== 'number' || obj.id <= 0) {
     return false;
   }
   
+  // Check if name and description are valid strings (not undefined, null, or empty)
+  if (typeof obj.name !== 'string' || !obj.name.trim() || 
+      typeof obj.description !== 'string' || !obj.description.trim()) {
+    return false;
+  }
+  
+  // Check if image is a valid object
   if (typeof obj.image !== 'object' || obj.image === null) {
     return false;
   }
@@ -134,9 +144,24 @@ export const validateProjectData = (project: unknown): project is ProjectDataChe
     return false;
   }
   
+  // Check if image has valid URL (not empty string)
+  if (typeof imageObj.url !== 'string' || !imageObj.url.trim()) {
+    return false;
+  }
+  
+  // Check if links is an array
   if (!Array.isArray(obj.links)) {
     return false;
   }
   
   return true;
+};
+
+/**
+ * Filters out invalid projects from an array
+ */
+export const filterValidProjects = (projects: unknown[]): ProjectDataCheck[] => {
+  return projects.filter((project): project is ProjectDataCheck => {
+    return validateProjectData(project);
+  });
 };

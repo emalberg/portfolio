@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import ProjectActionButton from '../ProjectActionButton/ProjectActionButton';
 import type { CardFaceProps } from '../ProjectCard/types';
+import { getOptimizedImageProps } from '@/lib/image-utils';
 
 export function CardFront({ project, isFlipped, onFlip }: CardFaceProps) {
   return (
@@ -22,7 +23,7 @@ export function CardFront({ project, isFlipped, onFlip }: CardFaceProps) {
               width={400}
               height={200}
               className="w-full h-40 object-cover transition-transform duration-300 hover:scale-105"
-              priority={false}
+              {...getOptimizedImageProps('project')}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
           </div>
