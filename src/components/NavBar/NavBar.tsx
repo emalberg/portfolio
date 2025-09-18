@@ -85,9 +85,6 @@ export default function NavBar({ data, className }: { data: TransformedNavBarDat
 
       const textColor = getTextColorForSection(activeSection);
 
-      // Debug logging
-      console.log('Active section:', activeSection, 'Text color:', textColor);
-
       setState(prev => ({
         ...prev,
         isScrolled,

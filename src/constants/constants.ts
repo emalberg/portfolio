@@ -898,6 +898,23 @@ export const SAMPLE_CERTIFICATE_DATA: {
   }
 }
 
+// SEO constants
+export const SEO_CONSTANTS = {
+  DEFAULT_TITLE: "Portfolio - Full Stack Developer",
+  DEFAULT_DESCRIPTION: "Professional portfolio showcasing full-stack development projects, skills, and experience",
+  DEFAULT_KEYWORDS: "full stack developer, react developer, next.js, portfolio, web development",
+  DEFAULT_CANONICAL_URL: "https://yourdomain.com",
+  DEFAULT_OG_TITLE: "Portfolio - Full Stack Developer",
+  DEFAULT_OG_DESCRIPTION: "Professional portfolio showcasing full-stack development projects, skills, and experience",
+  DEFAULT_OG_IMAGE: "https://yourdomain.com/og-image.jpg",
+  DEFAULT_OG_TYPE: "website" as const,
+  AUTHOR_NAME: "Erich Malberg",
+  APPLICATION_NAME: "Portfolio - Full Stack Developer",
+  GENERATOR: "Next.js",
+  ROBOTS: "index, follow",
+  MANIFEST: "/manifest.json",
+} as const
+
 // NavBar constants
 export const NAVBAR_CONSTANTS = {
   SCROLL_THRESHOLD: 50,
