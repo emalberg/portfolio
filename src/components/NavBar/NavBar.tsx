@@ -12,7 +12,6 @@ import { MobileMenu } from '@/components/MobileMenu';
 import { getOptimizedImageProps } from '@/lib/image-utils';
 import { getStrapiAssetUrl } from '@/utils/strapi-transformers';
 import { NavBarSkeleton } from '@/components/ui/loading-skeleton';
-import { getStrapiAssetUrl } from '@/utils/strapi-transformers';
 
 // Main NavBar Component
 export default function NavBar({ data, className }: { data: TransformedNavBarData | null; className?: string }) {
