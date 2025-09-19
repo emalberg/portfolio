@@ -4,21 +4,22 @@ import type { Social } from '@/components/SocialLink/types'
  * Validates if a social link object has all required properties
  */
 export function isValidSocial(social: unknown): social is Social {
+  if (!social || typeof social !== 'object' || social === null) {
+    return false;
+  }
+  
+  const obj = social as Record<string, unknown>;
+  
   return (
-    social &&
-    typeof social === 'object' &&
-    social !== null &&
-    'id' in social &&
-    'Name' in social &&
-    'Link' in social &&
-    'Icon' in social &&
-    typeof (social as any).id === 'number' &&
-    typeof (social as any).Name === 'string' &&
-    typeof (social as any).Link === 'string' &&
-    (social as any).Icon &&
-    typeof (social as any).Icon.url === 'string' &&
-    typeof (social as any).Icon.alternativeText === 'string'
-  )
+    typeof obj.id === 'number' &&
+    typeof obj.Name === 'string' &&
+    typeof obj.Link === 'string' &&
+    Boolean(obj.Icon) &&
+    typeof obj.Icon === 'object' &&
+    obj.Icon !== null &&
+    typeof (obj.Icon as Record<string, unknown>).url === 'string' &&
+    typeof (obj.Icon as Record<string, unknown>).alternativeText === 'string'
+  );
 }
 
 /**

@@ -1,11 +1,6 @@
 "use client"
 import React from 'react'
 import { cn } from '@/lib/utils'
-import { motion, AnimatePresence } from 'motion/react'
-import { 
-  ANIMATION_CONSTANTS, 
-  COMPONENT_IDS
-} from '@/constants/constants'
 import { useBioTabs } from '@/hooks'
 import { BioTabNavigation } from '@/components/BioTabNavigation/BioTabNavigation'
 import { BioTabContent } from '@/components/BioTabContent/BioTabContent'

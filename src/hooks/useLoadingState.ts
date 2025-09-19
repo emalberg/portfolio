@@ -35,7 +35,7 @@ export function useLoadingState(initialState = true, timeout = 5000) {
 }
 
 // Hook for staggered loading animations
-export function useStaggeredLoading(items: any[], staggerDelay = 100) {
+export function useStaggeredLoading<T>(items: T[], staggerDelay = 100) {
   const [visibleItems, setVisibleItems] = useState<number[]>([]);
 
   useEffect(() => {
@@ -52,7 +52,7 @@ export function useStaggeredLoading(items: any[], staggerDelay = 100) {
     return () => {
       timers.forEach(timer => clearTimeout(timer));
     };
-  }, [items.length, staggerDelay]);
+  }, [items, staggerDelay]);
 
   return visibleItems;
 }

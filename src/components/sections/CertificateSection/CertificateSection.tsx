@@ -13,7 +13,7 @@ import {
   validateCertificateSectionData,
   filterValidCertificates,
 } from '@/utils';
-import type { CertificateSectionProps } from './types';
+import type { CertificateData } from './types';
 import { CertificatesEmptyState } from '@/components/ui/empty-state';
 
 export default function CertificateSection({ 
@@ -25,17 +25,7 @@ export default function CertificateSection({
 }: { 
   title: string; 
   description: string; 
-  certificates: Array<{
-    id: number;
-    name: string;
-    issuer: string;
-    dateReceived: string;
-    expirationDate?: string;
-    image: {
-      url: string;
-      alt: string;
-    } | null;
-  }>;
+  certificates: CertificateData[];
   floatingStyles?: string;
   isLoading?: boolean;
 }) {
@@ -171,16 +161,16 @@ export default function CertificateSection({
             ) : (
               sectionData.Certificates.map((certificate, index) => (
                 <motion.div
-                  key={`${(certificate as any).id}-${index}`}
+                  key={`${certificate.id as number}-${index}`}
                   variants={animations.item}
                   className="w-full h-full"
                 >
                   <Certificate
-                    name={(certificate as any).name}
-                    issuer={(certificate as any).issuer}
-                    dateReceived={(certificate as any).dateReceived}
-                    expirationDate={(certificate as any).expirationDate}
-                    image={(certificate as any).image}
+                    name={certificate.name as string}
+                    issuer={certificate.issuer as string}
+                    dateReceived={certificate.dateReceived as string}
+                    expirationDate={certificate.expirationDate as string | undefined}
+                    image={certificate.image as { url: string; alt: string } | null}
                   />
                 </motion.div>
               ))

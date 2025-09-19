@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion, useMotionValue } from 'motion/react';
+import { motion } from 'motion/react';
 import Image from 'next/image';
 import { SKILL_CONSTANTS } from '@/constants/constants';
 import type { SkillIconProps } from '../Skill/types';

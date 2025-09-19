@@ -10,13 +10,27 @@ import {
   createProjectSectionAnimation,
   getProjectContainerClasses,
   getProjectInnerContainerClasses,
-  getProjectGridContainerClasses,
   validateProjectSectionData,
   filterValidProjects,
 } from '@/utils';
-import type { ProjectSectionProps } from './types';
 import { ProjectCardSkeleton } from '@/components/ui/loading-skeleton';
 import { ProjectsEmptyState } from '@/components/ui/empty-state';
+
+// Define project type
+type ProjectData = {
+  id: number;
+  name: string;
+  description: string;
+  image: {
+    url: string;
+    alt: string;
+  };
+  links: Array<{
+    type: "demo" | "repo" | "docs";
+    url: string;
+    label: string;
+  }>;
+};
 
 export default function ProjectSection({ 
   title, 
@@ -27,20 +41,7 @@ export default function ProjectSection({
 }: { 
   title: string; 
   description: string; 
-  projects: Array<{
-    id: number;
-    name: string;
-    description: string;
-    image: {
-      url: string;
-      alt: string;
-    };
-    links: Array<{
-      type: "demo" | "repo" | "docs";
-      url: string;
-      label: string;
-    }>;
-  }>;
+  projects: ProjectData[];
   floatingStyles?: string;
   isLoading?: boolean;
 }) {
@@ -195,14 +196,27 @@ export default function ProjectSection({
                 </motion.div>
               ))
             ) : (
-              currentProjects.map((project, index) => (
+              currentProjects.map((project) => (
                 <motion.div
-                  key={`${(project as any).id}-${currentPage}`}
+                  key={`${project.id as number}-${currentPage}`}
                   variants={animations.item}
                   className="w-full h-full"
                 >
                   <ProjectCard
-                    project={project as any}
+                    project={{
+                      id: project.id as number,
+                      name: project.name as string,
+                      description: project.description as string,
+                      image: {
+                        url: (project.image as { url: string; alt: string }).url,
+                        alt: (project.image as { url: string; alt: string }).alt
+                      },
+                      links: project.links as Array<{
+                        type: "demo" | "repo" | "docs";
+                        url: string;
+                        label: string;
+                      }>
+                    }}
                     className="w-full h-full"
                   />
                 </motion.div>

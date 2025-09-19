@@ -1,4 +1,4 @@
-import type { StrapiResponse, StrapiHeroSection, KeywordData } from '@/components/sections/HeroSection/types'
+import type { StrapiResponse, KeywordData } from '@/components/sections/HeroSection/types'
 
 /**
  * Parses Strapi response data and extracts hero section information

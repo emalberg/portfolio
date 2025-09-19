@@ -18,16 +18,6 @@ export function useAnimatedKeyword({
   const scrambleIntervalRef = useRef<NodeJS.Timeout | null>(null)
   const mainTimerRef = useRef<NodeJS.Timeout | null>(null)
 
-  const generateScrambledText = useCallback((targetLength: number) => {
-    let result = ''
-    for (let i = 0; i < targetLength; i++) {
-      result += SCRAMBLE_CONSTANTS.CHARACTERS.charAt(
-        Math.floor(Math.random() * SCRAMBLE_CONSTANTS.CHARACTERS.length)
-      )
-    }
-    return result
-  }, [])
-
   const scrambleText = useCallback((targetText: string) => {
     if (scrambleIntervalRef.current) {
       clearInterval(scrambleIntervalRef.current)
@@ -85,7 +75,7 @@ export function useAnimatedKeyword({
       scrambleText(nextKeyword)
       setIsVisible(true)
     }, animationDuration * ANIMATION_CONSTANTS.FADE_DELAY_MULTIPLIER)
-  }, [keywords.length, currentIndex, animationDuration, scrambleText])
+  }, [currentIndex, animationDuration, scrambleText, keywords])
 
   useEffect(() => {
     if (keywords.length <= 1) return

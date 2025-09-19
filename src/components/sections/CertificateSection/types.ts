@@ -1,5 +1,3 @@
-import type { CertificateProps } from '@/components/Certificate/types';
-
 export interface CertificateData {
   id: number;
   name: string;
@@ -9,7 +7,7 @@ export interface CertificateData {
   image: {
     url: string;
     alt: string;
-  };
+  } | null;
 }
 
 export interface CertificateSectionData {

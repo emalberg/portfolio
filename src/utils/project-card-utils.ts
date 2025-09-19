@@ -106,10 +106,6 @@ interface ProjectDataCheck {
   links: unknown;
 }
 
-interface ProjectImageCheck {
-  url: unknown;
-  alt: unknown;
-}
 
 export const validateProjectData = (project: unknown): project is ProjectDataCheck => {
   if (!project || typeof project !== 'object' || project === null) {

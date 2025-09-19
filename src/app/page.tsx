@@ -4,10 +4,10 @@ import { getHomePageDataWithFallback } from '@/lib/strapi-service';
 import { transformStrapiData } from '@/utils/strapi-transformers';
 import { DynamicSectionRenderer } from '@/components/DynamicSectionRenderer';
 import { PageLoadingSkeleton, ErrorSkeleton } from '@/components/ui/loading-skeleton';
-import { FALLBACK_PAGE_DATA, ISR_CONFIG } from '@/lib/fallback-data';
+import { FALLBACK_PAGE_DATA } from '@/lib/fallback-data';
 
-// Revalidate every 5 minutes in production, 1 minute in development
-export const revalidate = ISR_CONFIG.revalidateSeconds;
+// Revalidate every 5 minutes
+export const revalidate = 300;
 
 // Server-side data fetching with SSG/ISR and fallback strategy
 async function getHomePageData() {
