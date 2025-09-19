@@ -1,10 +1,9 @@
 "use client"
 import React from 'react'
-import { motion, AnimatePresence } from 'motion/react'
+import { AnimatePresence } from 'motion/react'
 import { cn } from '@/lib/utils'
 import { 
-  ANIMATION_CONSTANTS, 
-  SCRAMBLE_CONSTANTS 
+  ANIMATION_CONSTANTS
 } from '@/constants/constants'
 import { useAnimatedKeyword } from '@/hooks'
 import { KeywordDisplay } from '@/components/KeywordDisplay/KeywordDisplay'
@@ -19,7 +18,6 @@ export default function AnimatedKeyword({
   'aria-label': ariaLabel = 'Animated keywords'
 }: AnimatedKeywordProps) {
   const {
-    currentIndex,
     isVisible,
     scrambledText,
     isScrambling,

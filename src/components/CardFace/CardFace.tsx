@@ -8,7 +8,7 @@ import ProjectActionButton from '../ProjectActionButton/ProjectActionButton';
 import type { CardFaceProps } from '../ProjectCard/types';
 import { getOptimizedImageProps } from '@/lib/image-utils';
 
-export function CardFront({ project, isFlipped, onFlip }: CardFaceProps) {
+export function CardFront({ project, onFlip }: Omit<CardFaceProps, 'isFlipped'>) {
   return (
     <div className="w-full h-full">
       <Card
@@ -63,7 +63,7 @@ export function CardFront({ project, isFlipped, onFlip }: CardFaceProps) {
   );
 }
 
-export function CardBack({ project, isFlipped, onFlip }: CardFaceProps) {
+export function CardBack({ project, onFlip }: Omit<CardFaceProps, 'isFlipped'>) {
   return (
     <div className="w-full h-full">
       <Card className="min-h-80 bg-gradient-to-br from-card via-card to-muted/20">

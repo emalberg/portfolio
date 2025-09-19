@@ -9,8 +9,6 @@ import { SkillCardSkeleton } from '@/components/ui/loading-skeleton';
 
 export default function Skill({ name, iconUrl, iconAlt, isLoading = false }: SkillProps & { isLoading?: boolean }) {
   const { 
-    mouseX, 
-    mouseY, 
     springRotateX, 
     springRotateY, 
     handleMouseMove, 

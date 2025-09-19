@@ -8,7 +8,7 @@ export interface SEOData {
   OG_Description: string;
   OG_Image: string;
   OG_Type: string;
-  Schema_Data: any;
+  Schema_Data: Record<string, unknown>;
 }
 
 export async function fetchSEOData(): Promise<SEOData | null> {

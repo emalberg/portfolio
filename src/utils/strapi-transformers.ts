@@ -96,7 +96,13 @@ function transformProjectSection(projectSection: StrapiProjectSection | null): T
   return {
     title: projectSection.Title || '',
     description: extractTextFromRichText(projectSection.Description),
-    projects: validProjects as any[]
+    projects: validProjects as Array<{
+      id: number;
+      name: string;
+      description: string;
+      image: { url: string; alt: string; };
+      links: Array<{ type: "demo" | "repo" | "docs"; url: string; label: string; }>;
+    }>
   };
 }
 
@@ -122,7 +128,14 @@ function transformCertificateSection(certificateSection: StrapiCertificateSectio
   return {
     title: certificateSection.Title || '',
     description: extractTextFromRichText(certificateSection.Description),
-    certificates: validCertificates as any[]
+    certificates: validCertificates as Array<{
+      id: number;
+      name: string;
+      issuer: string;
+      dateReceived: string;
+      expirationDate?: string;
+      image: { url: string; alt: string; } | null;
+    }>
   };
 }
 
@@ -142,32 +155,6 @@ function transformSocialSection(socialSection: StrapiSocialSection): Transformed
       },
       order: social.Order || 0
     })).sort((a, b) => a.order - b.order) || []
-  };
-}
-
-// Transform navbar section data
-function transformNavBarSection(navBarSection: StrapiNavBarSection | null): TransformedNavBarData | null {
-  if (!navBarSection) return null;
-  
-  return {
-    logo: navBarSection.Logo ? {
-      url: navBarSection.Logo.url,
-      alt: navBarSection.Logo.alternativeText,
-      width: navBarSection.Logo.width,
-      height: navBarSection.Logo.height
-    } : null,
-    links: navBarSection.Links?.map((link) => ({
-      id: link.id,
-      name: link.Name,
-      target: link.Target || '',
-      order: link.Order
-    })).sort((a, b) => a.order - b.order) || [],
-    ctaButton: navBarSection.CTAButton ? {
-      id: navBarSection.CTAButton.id,
-      text: navBarSection.CTAButton.text,
-      url: navBarSection.CTAButton.url,
-      order: navBarSection.CTAButton.order
-    } : null
   };
 }
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import { SKILL_CONSTANTS } from '@/constants/constants';
 import type { SkillNameProps } from '../Skill/types';
 
 export function SkillName({ name }: SkillNameProps) {
