@@ -68,9 +68,8 @@ function transformSkillSection(skillSection: StrapiSkillSection | null): Transfo
       id: skill.id,
       name: skill.Name,
       icon: {
-        name: skill.Icon?.Name || '',
-        url: skill.Icon?.SVG?.url || '',
-        alt: skill.Icon?.SVG?.alternativeText || ''
+        url: skill.Icon?.url || '',
+        alt: skill.Icon?.alternativeText || ''
       }
     })) || []
   };
@@ -137,9 +136,9 @@ function transformSocialSection(socialSection: StrapiSocialSection): Transformed
       name: social.Name,
       link: social.Link,
       icon: {
-        name: social.Icon?.Name || '',
-        url: social.Icon?.SVG?.url || '',
-        alt: social.Icon?.SVG?.alternativeText || ''
+        name: social.Icon?.name || '',
+        url: social.Icon?.url || '',
+        alt: social.Icon?.alternativeText || ''
       },
       order: social.Order || 0
     })).sort((a, b) => a.order - b.order) || []

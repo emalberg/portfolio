@@ -16,8 +16,8 @@ export function isValidSocial(social: unknown): social is Social {
     typeof (social as any).Name === 'string' &&
     typeof (social as any).Link === 'string' &&
     (social as any).Icon &&
-    typeof (social as any).Icon.SVG?.url === 'string' &&
-    typeof (social as any).Icon.SVG?.alternativeText === 'string'
+    typeof (social as any).Icon.url === 'string' &&
+    typeof (social as any).Icon.alternativeText === 'string'
   )
 }
 
@@ -43,7 +43,7 @@ export function formatSocialLink(social: Social) {
     ...social,
     displayName: social.Name.trim(),
     displayUrl: social.Link.trim(),
-    iconUrl: social.Icon.SVG.url,
-    iconAlt: social.Icon.SVG.alternativeText || `${social.Name} icon`
+    iconUrl: social.Icon.url,
+    iconAlt: social.Icon.alternativeText || `${social.Name} icon`
   }
 }
