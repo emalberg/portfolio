@@ -81,11 +81,7 @@ export interface StrapiRichText {
 export interface StrapiSkill {
   id: number;
   Name: string;
-  Icon: {
-    id: number;
-    Name: string;
-    SVG: StrapiImage;
-  };
+  Icon: StrapiImage;
 }
 
 export interface StrapiSocial {
@@ -93,11 +89,7 @@ export interface StrapiSocial {
   id: number;
   Name: string;
   Link: string;
-  Icon: {
-    id: number;
-    Name: string;
-    SVG: StrapiImage;
-  };
+  Icon: StrapiImage;
 }
 
 export interface StrapiHeroSection {
@@ -227,7 +219,6 @@ export interface TransformedSkillData {
     id: number;
     name: string;
     icon: {
-      name: string;
       url: string;
       alt: string;
     };

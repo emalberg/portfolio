@@ -1,6 +1,6 @@
 'use client';
 
-import { SKILLS_SECTION_CONSTANTS, COMPONENT_IDS } from '@/constants/constants';
+import { COMPONENT_IDS } from '@/constants/constants';
 import { 
   createSkillsSectionAnimation, 
   createCarouselConfig,
@@ -10,7 +10,6 @@ import { useSmallScreenDetection } from '@/hooks';
 import SectionHeader from '../../SectionHeader/SectionHeader';
 import SkillCarousel from '../../SkillCarousel/SkillCarousel';
 import DecorativeElements from '../../DecorativeElements/DecorativeElements';
-import type { SkillsSectionProps } from './types';
 import { SkillCardSkeleton } from '@/components/ui/loading-skeleton';
 
 export default function SkillsSection({ 
@@ -26,7 +25,6 @@ export default function SkillsSection({
     id: number;
     name: string;
     icon: {
-      name: string;
       url: string;
       alt: string;
     };
@@ -42,12 +40,9 @@ export default function SkillsSection({
   const transformedSkills = skills.map(skill => ({
     id: skill.id,
     Name: skill.name,
-    Icon: {
-      Name: skill.icon.name,
-      SVG: {
-        url: process.env.NEXT_PUBLIC_STRAPI_URL + skill.icon.url,
-        alternativeText: skill.icon.alt
-      }
+    Icon: { 
+      url: process.env.NEXT_PUBLIC_STRAPI_URL + skill.icon.url,
+      alternativeText: skill.icon.alt      
     }
   }));
 

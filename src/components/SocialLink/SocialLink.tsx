@@ -16,7 +16,7 @@ export default function SocialLink({
 
   const mobileClasses = `${baseClasses} text-foreground hover:text-primary px-3 py-2 rounded-lg hover:bg-accent/10 transition-colors`
 
-  const iconUrl = process.env.NEXT_PUBLIC_STRAPI_URL + social.Icon.SVG.url
+  const iconUrl = process.env.NEXT_PUBLIC_STRAPI_URL + social.Icon.url
 
   if (isMobile) {
     return (
@@ -30,11 +30,11 @@ export default function SocialLink({
       >
         <Image
           src={iconUrl}
-          alt={social.Icon.SVG.alternativeText}
+          alt={social.Icon.alternativeText}
           className="w-6 h-6 filter invert"
-          width={social.Icon.SVG.width}
-          height={social.Icon.SVG.height}
-          {...getOptimizedImagePropsWithSize('social-icon', social.Icon.SVG.width, social.Icon.SVG.height)}
+          width={social.Icon.width}
+          height={social.Icon.height}
+          {...getOptimizedImagePropsWithSize('social-icon', social.Icon.width, social.Icon.height)}
         />
         <span className="font-medium text-sm text-primary-foreground">
           {social.Name}
@@ -71,11 +71,11 @@ export default function SocialLink({
         </span>
         <Image
           src={iconUrl}
-          alt={social.Icon.SVG.alternativeText}
+          alt={social.Icon.alternativeText}
           className="w-5 h-5 flex-shrink-0"
-          width={social.Icon.SVG.width}
-          height={social.Icon.SVG.height}
-          {...getOptimizedImagePropsWithSize('social-icon-small', social.Icon.SVG.width, social.Icon.SVG.height)}
+          width={social.Icon.width}
+          height={social.Icon.height}
+          {...getOptimizedImagePropsWithSize('social-icon-small', social.Icon.width, social.Icon.height)}
         />
       </div>
     </motion.a>

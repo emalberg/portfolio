@@ -44,28 +44,11 @@ function HeroSectionWithFallback({ data, socials }: { data: TransformedPageData[
     Link: social.link,
     Icon: {
       id: social.id,
-      Name: social.icon.name,
-      SVG: {
-        id: social.id,
-        documentId: '',
-        name: social.icon.name,
-        alternativeText: social.icon.alt,
-        caption: null,
-        width: 24,
-        height: 24,
-        formats: null,
-        hash: '',
-        ext: '.svg',
-        mime: 'image/svg+xml',
-        size: 0,
-        url: social.icon.url,
-        previewUrl: null,
-        provider: 'local',
-        provider_metadata: null,
-        createdAt: '',
-        updatedAt: '',
-        publishedAt: ''
-      }
+      name: social.icon.name,
+      alternativeText: social.icon.alt,
+      width: 24,
+      height: 24,
+      url: social.icon.url,
     },
     Order: social.order
   }));
@@ -192,28 +175,11 @@ export function DynamicSectionRenderer({ data, isFallback = false, lastUpdated }
               Link: social.link,
               Icon: {
                 id: social.id,
-                Name: social.icon.name,
-                SVG: {
-                  id: social.id,
-                  documentId: '',
-                  name: social.icon.name,
-                  alternativeText: social.icon.alt,
-                  caption: null,
-                  width: 24,
-                  height: 24,
-                  formats: null,
-                  hash: '',
-                  ext: '.svg',
-                  mime: 'image/svg+xml',
-                  size: 0,
-                  url: social.icon.url,
-                  previewUrl: null,
-                  provider: 'local',
-                  provider_metadata: null,
-                  createdAt: '',
-                  updatedAt: '',
-                  publishedAt: ''
-                }
+                name: social.icon.name,
+                alternativeText: social.icon.alt,
+                width: 24,
+                height: 24,
+                url: social.icon.url,
               },
               Order: social.order
             }}
