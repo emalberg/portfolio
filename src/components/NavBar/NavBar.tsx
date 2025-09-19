@@ -127,7 +127,7 @@ export default function NavBar({ data, className }: { data: TransformedNavBarDat
             <div className="flex-shrink-0 relative">
               <Image
                 onClick={() => scrollToSection('hero-section')}
-                src={getStrapiAssetUrl(data.logo.url)}
+                src={getStrapiAssetUrl(data.logo?.url)}
                 alt={data.logo.alt || 'Logo'}
                 width={data.logo.width || 240}
                 height={data.logo.height || 100}
