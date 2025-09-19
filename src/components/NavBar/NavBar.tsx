@@ -14,9 +14,7 @@ import { NavBarSkeleton } from '@/components/ui/loading-skeleton';
 
 // Main NavBar Component
 export default function NavBar({ data, className }: { data: TransformedNavBarData | null; className?: string }) {
-  if (!data) {
-    return <NavBarSkeleton />;
-  }
+
   const [state, setState] = useState<NavBarState>({
     isScrolled: false,
     activeSection: null,
@@ -54,7 +52,7 @@ export default function NavBar({ data, className }: { data: TransformedNavBarDat
       const isScrolled = scrollY > NAVBAR_CONSTANTS.SCROLL_THRESHOLD;
 
       // Find active section based on scroll position
-      const sections = data.links ? data.links.map(link => link.target) : [];
+      const sections = data?.links ? data?.links.map(link => link.target) : [];
       // Add hero section to the list of sections to check
       sections.unshift('hero-section');
       let activeSection: string | null = null;
@@ -98,7 +96,12 @@ export default function NavBar({ data, className }: { data: TransformedNavBarDat
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [data.links, getTextColorForSection]);
+  }, [data?.links, getTextColorForSection]);
+
+  // Early return after all hooks
+  if (!data) {
+    return <NavBarSkeleton />;
+  }
 
   // Sort links by order if they exist
   const sortedLinks = data.links ? [...data.links].sort((a, b) => a.order - b.order) : [];

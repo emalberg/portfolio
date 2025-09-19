@@ -71,7 +71,7 @@ async function fetchWithTimeout<T>(
       ...options,
       // Add abort signal to fetch options
       signal: controller.signal
-    } as any);
+    } as FetchOptions & { signal: AbortSignal });
     
     clearTimeout(timeoutId);
     return result;

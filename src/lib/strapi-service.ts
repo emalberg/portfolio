@@ -1,5 +1,5 @@
 import { StrapiHomePageResponse } from '@/types/strapi';
-import { FALLBACK_PAGE_DATA, ISR_CONFIG } from './fallback-data';
+import { ISR_CONFIG } from './fallback-data';
 
 const STRAPI_BASE_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
 const STRAPI_API_URL = `${STRAPI_BASE_URL}/api`;
@@ -71,7 +71,7 @@ async function fetchWithTimeout<T>(
       ...options,
       // Add abort signal to fetch options
       signal: controller.signal
-    } as any);
+    } as FetchOptions & { signal: AbortSignal });
     
     clearTimeout(timeoutId);
     return result;

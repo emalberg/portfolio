@@ -58,7 +58,6 @@ export default function ProjectCard({ project, className = '', isLoading = false
         {!isFlipped ? (
           <CardFront
             project={project}
-            isFlipped={isFlipped}
             onFlip={handleFlip}
           />
         ) : (
@@ -70,7 +69,6 @@ export default function ProjectCard({ project, className = '', isLoading = false
           >
             <CardBack
               project={project}
-              isFlipped={isFlipped}
               onFlip={handleFlip}
             />
           </div>
