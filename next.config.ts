@@ -16,10 +16,10 @@ const nextConfig: NextConfig = {
         port: '1337',
         pathname: '/**',
       },
-      // Production Strapi (add your production domain)
+      // Production Strapi (Strapi Cloud CDN)
       {
         protocol: 'https',
-        hostname: 'your-strapi-domain.com',
+        hostname: 'shining-animal-0c08b674e5.media.strapiapp.com',
         pathname: '/**',
       },
     ],
