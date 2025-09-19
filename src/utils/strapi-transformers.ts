@@ -188,12 +188,12 @@ export function transformStrapiData(data: StrapiHomePageData): TransformedPageDa
 export function getStrapiAssetUrl(url: string): string {
   if (!url) return '';
   
-  // If it's already a full URL, return as is
+  // If it's already a full URL (production), return as is
   if (url.startsWith('http://') || url.startsWith('https://')) {
     return url;
   }
   
-  // If it's a relative URL, prepend the Strapi base URL
+  // If it's a relative URL (local development), prepend the Strapi base URL
   const strapiBaseUrl = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
   return `${strapiBaseUrl}${url}`;
 }

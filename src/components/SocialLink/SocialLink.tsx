@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { motion } from 'motion/react'
 import type { SocialLinkProps } from './types'
 import { getOptimizedImagePropsWithSize } from '@/lib/image-utils'
+import { getStrapiAssetUrl } from '@/utils/strapi-transformers'
 
 export default function SocialLink({
   social,
@@ -16,7 +17,7 @@ export default function SocialLink({
 
   const mobileClasses = `${baseClasses} text-foreground hover:text-primary px-3 py-2 rounded-lg hover:bg-accent/10 transition-colors`
 
-  const iconUrl = process.env.NEXT_PUBLIC_STRAPI_URL + social.Icon.url
+  const iconUrl = getStrapiAssetUrl(social.Icon.url)
 
   if (isMobile) {
     return (

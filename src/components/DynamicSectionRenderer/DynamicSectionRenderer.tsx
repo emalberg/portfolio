@@ -1,4 +1,5 @@
 import { Suspense } from 'react';
+import { getStrapiAssetUrl } from '@/utils/strapi-transformers';
 import { TransformedPageData } from '@/types/strapi';
 import HeroSection from '@/components/sections/HeroSection/HeroSection';
 import SkillsSection from '@/components/sections/SkillsSection/SkillsSection';
@@ -63,7 +64,7 @@ function HeroSectionWithFallback({ data, socials }: { data: TransformedPageData[
         bio1Content={data.bio.about.content}
         bio2Title={data.bio.work.title}
         bio2Content={data.bio.work.content}
-        backgroundImage={process.env.NEXT_PUBLIC_STRAPI_URL + data.background.url}
+        backgroundImage={getStrapiAssetUrl(data.background.url)}
         socials={transformedSocials}
       />
     </Suspense>
