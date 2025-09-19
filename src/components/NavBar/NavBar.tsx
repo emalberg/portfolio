@@ -11,6 +11,7 @@ import { NavBarCTAButton } from '@/components/NavBarCTAButton';
 import { MobileMenu } from '@/components/MobileMenu';
 import { getOptimizedImageProps } from '@/lib/image-utils';
 import { NavBarSkeleton } from '@/components/ui/loading-skeleton';
+import { getStrapiAssetUrl } from '@/utils/strapi-transformers';
 
 // Main NavBar Component
 export default function NavBar({ data, className }: { data: TransformedNavBarData | null; className?: string }) {
@@ -125,7 +126,7 @@ export default function NavBar({ data, className }: { data: TransformedNavBarDat
             <div className="flex-shrink-0 relative">
               <Image
                 onClick={() => scrollToSection('hero-section')}
-                src={process.env.NEXT_PUBLIC_STRAPI_URL + data.logo.url}
+                src={getStrapiAssetUrl(data.logo.url)}
                 alt={data.logo.alt || 'Logo'}
                 width={data.logo.width || 240}
                 height={data.logo.height || 100}
