@@ -61,8 +61,8 @@ export default function SkillCarousel({
                   >
                     <Skill
                       name={skill.Name}
-                      iconUrl={skill.Icon.SVG.url}
-                      iconAlt={skill.Icon.SVG.alternativeText}
+                      iconUrl={skill.Icon.url}
+                      iconAlt={skill.Icon.alternativeText}
                     />
                   </motion.div>
                 </div>

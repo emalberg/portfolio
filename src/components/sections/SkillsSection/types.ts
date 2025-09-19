@@ -1,9 +1,7 @@
 export interface SkillIcon {
-  Name: string;
-  SVG: {
-    url: string;
-    alternativeText: string;
-  };
+  url: string;
+  alternativeText: string;
+  
 }
 
 export interface SkillData {
