@@ -6,6 +6,7 @@ import {
   createCarouselConfig,
   getSkillsContainerClasses
 } from '@/utils';
+import { getStrapiAssetUrl } from '@/utils/strapi-transformers';
 import { useSmallScreenDetection } from '@/hooks';
 import SectionHeader from '../../SectionHeader/SectionHeader';
 import SkillCarousel from '../../SkillCarousel/SkillCarousel';
@@ -41,7 +42,7 @@ export default function SkillsSection({
     id: skill.id,
     Name: skill.name,
     Icon: { 
-      url: process.env.NEXT_PUBLIC_STRAPI_URL + skill.icon.url,
+      url: getStrapiAssetUrl(skill.icon.url),
       alternativeText: skill.icon.alt      
     }
   }));
