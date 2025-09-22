@@ -145,7 +145,7 @@ export interface StrapiCertificateSection {
     Issuer: string;
     dateReceived: string;
     expirationDate?: string;
-    image: StrapiImage | null;
+    Image: StrapiImage | null;
   }>;
 }
 

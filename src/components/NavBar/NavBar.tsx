@@ -19,7 +19,7 @@ export default function NavBar({ data, className }: { data: TransformedNavBarDat
   const [state, setState] = useState<NavBarState>({
     isScrolled: false,
     activeSection: null,
-    textColor: 'dark'
+    textColor: 'light' // Start with light text since we're likely at the top initially
   });
 
   // Smooth scroll to section
@@ -41,6 +41,10 @@ export default function NavBar({ data, className }: { data: TransformedNavBarDat
   const getTextColorForSection = useCallback((sectionId: string | null): 'light' | 'dark' => {
     // Hero section (at top) should have light text, all other sections should have dark text
     if (sectionId === 'hero-section') {
+      return 'light';
+    }
+    // If no section is detected and we're at the top, assume hero section
+    if (!sectionId && window.scrollY <= NAVBAR_CONSTANTS.SCROLL_THRESHOLD) {
       return 'light';
     }
     return 'dark';
@@ -65,7 +69,7 @@ export default function NavBar({ data, className }: { data: TransformedNavBarDat
         const offset = NAVBAR_CONSTANTS.SCROLL_OFFSET;
         
         if (heroRect.top <= offset && heroRect.bottom > offset) {
-          activeSection = 'hero-section'; // In hero section = white text
+          activeSection = 'hero-section'; // In hero section = light text
         } else {
           // Check other sections
           for (const sectionId of sections) {
@@ -82,6 +86,11 @@ export default function NavBar({ data, className }: { data: TransformedNavBarDat
         }
       }
 
+      // If no active section found and we're at the top, assume hero section
+      if (!activeSection && scrollY <= NAVBAR_CONSTANTS.SCROLL_THRESHOLD) {
+        activeSection = 'hero-section';
+      }
+
       const textColor = getTextColorForSection(activeSection);
 
       setState(prev => ({
@@ -92,17 +101,37 @@ export default function NavBar({ data, className }: { data: TransformedNavBarDat
       }));
     };
 
-    // Initial check
-    handleScroll();
+    // Initial check with a small delay to ensure DOM is ready
+    const initialCheck = () => {
+      handleScroll();
+    };
+
+    // Run immediately and also after a short delay to ensure DOM is ready
+    initialCheck();
+    const timeoutId = setTimeout(initialCheck, 100);
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timeoutId);
+    };
   }, [data?.links, getTextColorForSection]);
 
   // Early return after all hooks
   if (!data) {
     return <NavBarSkeleton />;
   }
+
+  // Ensure we have the correct initial text color based on scroll position
+  useEffect(() => {
+    if (window.scrollY <= NAVBAR_CONSTANTS.SCROLL_THRESHOLD) {
+      setState(prev => ({
+        ...prev,
+        textColor: 'light',
+        activeSection: 'hero-section'
+      }));
+    }
+  }, []);
 
   // Sort links by order if they exist
   const sortedLinks = data.links ? [...data.links].sort((a, b) => a.order - b.order) : [];
