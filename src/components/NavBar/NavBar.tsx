@@ -117,11 +117,6 @@ export default function NavBar({ data, className }: { data: TransformedNavBarDat
     };
   }, [data?.links, getTextColorForSection]);
 
-  // Early return after all hooks
-  if (!data) {
-    return <NavBarSkeleton />;
-  }
-
   // Ensure we have the correct initial text color based on scroll position
   useEffect(() => {
     if (window.scrollY <= NAVBAR_CONSTANTS.SCROLL_THRESHOLD) {
@@ -132,6 +127,11 @@ export default function NavBar({ data, className }: { data: TransformedNavBarDat
       }));
     }
   }, []);
+
+  // Early return after all hooks
+  if (!data) {
+    return <NavBarSkeleton />;
+  }
 
   // Sort links by order if they exist
   const sortedLinks = data.links ? [...data.links].sort((a, b) => a.order - b.order) : [];
