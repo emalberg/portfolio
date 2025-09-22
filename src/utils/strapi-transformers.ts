@@ -6,14 +6,12 @@ import {
   TransformedProjectData, 
   TransformedCertificateData, 
   TransformedSocialData,
-  TransformedNavBarData,
   StrapiRichText,
   StrapiHeroSection,
   StrapiSkillSection,
   StrapiProjectSection,
   StrapiCertificateSection,
-  StrapiSocialSection,
-  StrapiNavBarSection
+  StrapiSocialSection
 } from '@/types/strapi';
 import { filterValidProjects } from './project-card-utils';
 import { filterValidCertificates } from './certificate-section-utils';
@@ -116,9 +114,9 @@ function transformCertificateSection(certificateSection: StrapiCertificateSectio
     issuer: cert.Issuer,
     dateReceived: cert.dateReceived,
     expirationDate: cert.expirationDate,
-    image: cert.image ? {
-      url: cert.image.url,
-      alt: cert.image.alternativeText || ''
+    image: cert.Image ? {
+      url: getStrapiAssetUrl(cert.Image.url),
+      alt: cert.Image.alternativeText || ''
     } : null
   })) || [];
 
